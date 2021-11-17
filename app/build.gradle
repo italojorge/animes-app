@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId androidProdApplicationId
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+        versionCode androidVersionCode
+        versionName androidVersionName
+        flavorDimensions "default"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        homolog {
+            versionNameSuffix "-homolog"
+            resValue("string", "app_name", "Homolog - Animes")
+            applicationId androidDevApplicationId
+        }
+        prod {
+            resValue("string", "app_name", "Animes")
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            versionNameSuffix = '-debug'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':di')
+    implementation project(':navigation')
+    implementation project(':base_domain')
+    implementation project(':data')
+    implementation platform(firebaseBoM)
+    appDependencies.each { add(it.configuration, it.dependency, it.options) }
+}

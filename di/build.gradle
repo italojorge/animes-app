@@ -1,0 +1,12 @@
+apply from: "../common-android-module.gradle"
+
+dependencies {
+    implementation project(':navigation')
+    implementation project(':base_feature')
+    implementation project(':feature_auth')
+    implementation project(':base_domain')
+    implementation project(':data')
+
+    implementation platform(firebaseBoM)
+    diDependencies.each { add(it.configuration, it.dependency, it.option) }
+}

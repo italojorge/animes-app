@@ -1,0 +1,76 @@
+ext {
+    commonsDependencies = [
+            [configuration: "implementation", dependency: fileTree(dir: 'libs', include: ['*.jar'])],
+            [configuration: "implementation", dependency: "$kotlin"],
+            [configuration: "implementation", dependency: "$kotlinReflect"],
+            [configuration: "implementation", dependency: "$coroutine"],
+            [configuration: "implementation", dependency: "$androidKtxCore"]
+    ]
+
+    appDependencies = commonsDependencies + [
+            [configuration: "implementation", dependency: "$koinMain"],
+            [configuration: "implementation", dependency: "$appCompat"],
+            [configuration: "implementation", dependency: "$httpLoggingInterceptor"],
+            [configuration: "implementation", dependency: "$lifecycleRuntime"],
+            [configuration: "implementation", dependency: "$navigationUi"],
+            [configuration: "implementation", dependency: "$navigationFragment"],
+            [configuration: "implementation", dependency: "$material"],
+            [configuration: "implementation", dependency: "$firebaseAnalytics"],
+            [configuration: "implementation", dependency: "$firebaseInAppMessaging"],
+            [configuration: "implementation", dependency: "$playcore"],
+            [configuration: "implementation", dependency: "$playcoreKtx"],
+    ]
+
+    featureDependencies = commonsDependencies + [
+            [configuration: "implementation", dependency: "$koinMain"],
+            [configuration: "implementation", dependency: "$appCompat"],
+            [configuration: "implementation", dependency: "$httpLoggingInterceptor"],
+            [configuration: "implementation", dependency: "$lifecycleRuntime"],
+            [configuration: "implementation", dependency: "$navigationUi"],
+            [configuration: "implementation", dependency: "$navigationFragment"],
+            [configuration: "implementation", dependency: "$material"]
+    ]
+
+    intentDependencies = featureDependencies + [
+            [configuration: "implementation", dependency: "$navigationFragment"],
+            [configuration: "implementation", dependency: "$navigationUi"]
+    ]
+
+    presentationDependencies = commonsDependencies + [
+            [configuration: "implementation", dependency: "$koinMain"],
+            [configuration: "implementation", dependency: "$appCompat"],
+            [configuration: "implementation", dependency: "$lifecycleViewModel"],
+            [configuration: "implementation", dependency: "$lifecycleRuntime"],
+            [configuration: "implementation", dependency: "$lifecycleLiveData"],
+            [configuration: "implementation", dependency: "$lifecycleJava8"],
+            [configuration: "implementation", dependency: "$lifecycleCompiler"]
+    ]
+
+    diDependencies = commonsDependencies + [
+            [configuration: "implementation", dependency: "$appCompat"],
+            [configuration: "implementation", dependency: "$lifecycleViewModel"],
+            [configuration: "implementation", dependency: "$koinMain"],
+            [configuration: "implementation", dependency: "$koinExtension"],
+            [configuration: "implementation", dependency: "$gson"],
+            [configuration: "implementation", dependency: "$retrofit2"],
+            [configuration: "implementation", dependency: "$retrofitCoroutine"],
+            [configuration: "implementation", dependency: "$httpLoggingInterceptor"],
+            [configuration: "implementation", dependency: "$gsonConvertFacotory"],
+            [configuration: "implementation", dependency: "$firebaseRemoteConfig"],
+            [configuration: "implementation", dependency: "$firebaseCrashlytics"],
+            [configuration: "implementation", dependency: "$firebaseAnalytics"],
+            [configuration: "implementation", dependency: "$biometric"]
+    ]
+
+    domainDependencies = commonsDependencies
+
+    dataDependencies = commonsDependencies + [
+            [configuration: "implementation", dependency: "$gson"],
+            [configuration: "implementation", dependency: "$retrofit2"],
+            [configuration: "implementation", dependency: "$retrofitCoroutine"],
+            [configuration: "implementation", dependency: "$httpLoggingInterceptor"],
+            [configuration: "implementation", dependency: "$gsonConvertFacotory"],
+            [configuration: "implementation", dependency: "$koinExtension"],
+            [configuration: "implementation", dependency: "$firebaseRemoteConfig"]
+    ]
+}

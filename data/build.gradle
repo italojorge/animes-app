@@ -1,0 +1,7 @@
+apply from: "../common-android-module.gradle"
+
+dependencies {
+    api project(':base_domain')
+    implementation platform(firebaseBoM)
+    dataDependencies.each { add(it.configuration, it.dependency, it.options) }
+}

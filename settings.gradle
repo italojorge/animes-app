@@ -1,0 +1,1 @@
+include ':app', ':base_feature', ':di', ':navigation', ':base_domain', ':data', ':feature_main', ':feature_auth'

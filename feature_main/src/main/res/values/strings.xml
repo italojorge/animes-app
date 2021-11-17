@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bc100_content_description">BC100</string>
+    <string name="alavancagem_content_description">Alavancagem</string>
+    <string name="bc100p_content_description">BC100P</string>
+    <string name="gv_power_content_description">GV Power</string>
+    <string name="select_strategy_title">Selecione uma de suas estratégias disponíveis abaixo:</string>
+</resources>

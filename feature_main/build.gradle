@@ -1,0 +1,5 @@
+apply from: "../feature-common-module.gradle"
+
+dependencies {
+    implementation project(':base_feature')
+}
