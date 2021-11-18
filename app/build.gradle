@@ -55,7 +55,7 @@ android {
 dependencies {
     implementation project(':di')
     implementation project(':navigation')
-    implementation project(':base_domain')
+    implementation project(':bases:base-domain')
     implementation project(':data')
     implementation platform(firebaseBoM)
     appDependencies.each { add(it.configuration, it.dependency, it.options) }

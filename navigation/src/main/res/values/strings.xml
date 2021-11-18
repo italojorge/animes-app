@@ -1,5 +1,0 @@
-<resources>
-    <string name="fragment_no_title">" "</string>
-    <string name="select_strategy_toolbar_title">Escolha a estratégia</string>
-    <string name="change_first_password_toolbar_title">Trocar senha inicial</string>
-</resources>

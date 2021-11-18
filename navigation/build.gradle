@@ -2,9 +2,9 @@ apply from: "../common-android-module.gradle"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 dependencies {
-    api project(':base_feature')
-    implementation project(':feature_main')
-    implementation project(':feature_auth')
+    api project(':bases:base-ui')
+    implementation project(':features:feature-home')
+    implementation project(':features:feature-auth')
 
     intentDependencies.each { add(it.configuration, it.dependency) }
 }
