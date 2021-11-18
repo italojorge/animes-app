@@ -3,7 +3,8 @@ object Versioning {
         const val COMPILE_SDK_VERSION = 30
         const val MIN_SDK_VERSION = 21
         const val TARGET_SDK_VERSION = 30
-        const val APP_VERSION_CODE = 11000
+        const val APP_VERSION_CODE = 1
+        const val APP_VERSION_NAME = "0.1.0"
     }
 
     object Uikit{
@@ -11,11 +12,11 @@ object Versioning {
         const val VERSION_NAME = "0.1.0"
     }
 
-    const val ANDROID_GRADLE_PLUGIN_VERSION = "4.2.1"
+    const val ANDROID_GRADLE_PLUGIN_VERSION = "7.0.3"
     const val FIREBASE_CRASHLYTICS_GRADLE_VERSION = "2.3.0"
     const val FIREBASE_PERFORMANCE_GRADLE_VERSION = "1.3.4"
     const val PLAY_SERVICES_PLUGIN_VERSION = "4.3.8"
-    const val KOTLIN_VERSION = "1.4.31"
+    const val KOTLIN_VERSION = "1.6.0"
     const val LIFECYCLE_VERSION = "2.2.0"
     const val COROUTINES_VERSION = "1.4.3"
     const val NAVIGATION_VERSION = "2.3.4"

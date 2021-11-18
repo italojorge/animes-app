@@ -9,15 +9,6 @@ object Config {
             "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versioning.KOTLIN_VERSION}"
         const val NAVIGATION_SAFE_ARGS_PLUGIN =
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versioning.NAVIGATION_VERSION}"
-        const val JACOCO_PLUGIN = "org.jacoco:org.jacoco.core:${Versioning.JACOCO_VERSION}"
-        const val PLAY_SERVICES_PLUGIN =
-            "com.google.gms:google-services:${Versioning.PLAY_SERVICES_PLUGIN_VERSION}"
-        const val CRASHLYTICS_PLUGIN =
-            "com.google.firebase:firebase-crashlytics-gradle:${Versioning.FIREBASE_CRASHLYTICS_GRADLE_VERSION}"
-        const val PERFORMANCE_PLUGIN =
-            "com.google.firebase:perf-plugin:${Versioning.FIREBASE_PERFORMANCE_GRADLE_VERSION}"
-        const val APP_DISTRIBUTION =
-            "com.google.firebase:firebase-appdistribution-gradle:${Versioning.APP_DISTRIBUTION}"
         const val JUNIT_5 =
             "de.mannodermaus.gradle.plugins:android-junit5:${Versioning.JUNIT_5_PLUGIN_VERSION}"
     }
@@ -25,17 +16,6 @@ object Config {
     object Android {
         const val APPLICATION_ID = "br.com.meupag"
         const val TEST_INSTRUMENTATION_RUNNER = "br.com.p20.espresso.runner.EspressoRunner"
-    }
-
-    /**
-     * Estamos usando versão dinâmina aqui para sempre executar a pipeline com a versão mais nova
-     * da lib de conta, isso evitar problemas de integração.
-     * Obs: Não usar versão fixa
-     */
-    object WillLibs {
-        const val ACCOUNT_MODULE = "br.com.will.account:flutter_release:0.1.41"
-        const val ACCOUNT_MODULE_SNAPSHOTS = "br.com.will.account:flutter_release:0.1.+"
-        const val MEU_PAG_MODULE = "br.com.meupag:pag:1.60.0"
     }
 
     object Libs {
@@ -183,15 +163,6 @@ object Config {
         const val TRUTH = "com.google.truth:truth:1.1"
         const val JSON = "org.json:json:20180130"
     }
-
-    object UIKitLibs {
-        const val ROBOLECTRIC = "org.robolectric:robolectric:4.4"
-    }
-}
-
-fun DependencyHandler.will() {
-    releaseImplementation(Config.WillLibs.ACCOUNT_MODULE)
-    debugImplementation(Config.WillLibs.ACCOUNT_MODULE_SNAPSHOTS)
 }
 
 fun DependencyHandler.androidx() {
@@ -202,6 +173,7 @@ fun DependencyHandler.androidx() {
     api(Config.Libs.MULTIDEX)
     api(Config.Libs.RECYCLER_VIEW)
     api(Config.Libs.FRAGMENT)
+    implementation(Config.Libs.MATERIAL_DESIGN)
 }
 
 fun DependencyHandler.lifecycle() {
