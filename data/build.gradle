@@ -1,4 +1,4 @@
-apply from: "../common-android-module.gradle"
+apply from: "../android-library-module.gradle"
 
 dependencies {
     api project(':bases:base-domain')

@@ -1,24 +1,21 @@
 buildscript {
     repositories {
         google()
-        maven { url = uri("https://jitpack.io") }
         mavenCentral()
     }
 
     dependencies {
-        classpath(Config.BuildPlugins.ANDROID_PLUGIN)
-        classpath(Config.BuildPlugins.KOTLIN_PLUGIN)
-        classpath(Config.BuildPlugins.NAVIGATION_SAFE_ARGS_PLUGIN)
-        classpath(Config.BuildPlugins.JUNIT_5)
+        classpath(ProjectConfig.BuildPlugins.ANDROID_PLUGIN)
+        classpath(ProjectConfig.BuildPlugins.KOTLIN_PLUGIN)
+        classpath(ProjectConfig.BuildPlugins.NAVIGATION_SAFE_ARGS_PLUGIN)
+        classpath(ProjectConfig.BuildPlugins.JUNIT_5)
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
-        maven { url = uri("https://jitpack.io") }
     }
 }
 

@@ -1,7 +1,10 @@
+import dependencies.androidx
+import dependencies.api
+import dependencies.koin
+
 plugins {
     id("com.android.library")
     kotlin("android")
-    apply plugin: "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -23,12 +26,14 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-    api project(':bases:base-ui')
-    implementation project(':features:feature-home')
-    implementation project(':features:feature-auth')
-
-    intentDependencies.each { add(it.configuration, it.dependency) }
+    androidx()
+    koin()
+    api(project(":bases:base-domain"))
 }

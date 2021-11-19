@@ -8,8 +8,7 @@ class DoLogin(
     private val validateUserUseCase: ValidateUser,
     private val validateAppPasswordUseCase: ValidateAppPassword,
     private val authRepository: AuthRepository
-) :
-    UseCase<UserCredentials, Unit>() {
+) : UseCase<UserCredentials, Unit>() {
     override suspend fun execute(param: UserCredentials): Result<Unit> {
         val validatePasswordResult = validateAppPasswordUseCase.execute(
             ValidateAppPassword.Params(password = param.password)

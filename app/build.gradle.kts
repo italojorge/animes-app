@@ -1,3 +1,5 @@
+import dependencies.*
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -6,14 +8,14 @@ plugins {
 }
 
 android {
-    compileSdk = Versioning.Android.COMPILE_SDK_VERSION
+    compileSdk = ProjectConfig.Android.COMPILE_SDK_VERSION
     defaultConfig {
-        applicationId = Config.Android.APPLICATION_ID
-        minSdk = Versioning.Android.MIN_SDK_VERSION
-        targetSdk = Versioning.Android.TARGET_SDK_VERSION
-        versionCode = Versioning.Android.APP_VERSION_CODE
-        versionName = Versioning.Android.APP_VERSION_NAME
-        testInstrumentationRunner = Config.Android.TEST_INSTRUMENTATION_RUNNER
+        applicationId = ProjectConfig.Android.APPLICATION_ID
+        minSdk = ProjectConfig.Android.MIN_SDK_VERSION
+        targetSdk = ProjectConfig.Android.TARGET_SDK_VERSION
+        versionCode = ProjectConfig.Android.APP_VERSION_CODE
+        versionName = ProjectConfig.Android.APP_VERSION_NAME
+        testInstrumentationRunner = ProjectConfig.Android.TEST_INSTRUMENTATION_RUNNER
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
 

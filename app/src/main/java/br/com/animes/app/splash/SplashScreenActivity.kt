@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        val splashScreen = installSplashScreen()
         setContentView(br.com.animes.R.layout.bg_splash)
     }
 }
