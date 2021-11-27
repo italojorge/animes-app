@@ -4,94 +4,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@drawable/shape_gradient_dark_green"
+    android:background="@color/beige"
     tools:context=".login.LoginFragment">
 
-    <ImageView
-        android:id="@+id/loginLogoImageView"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/login_title_text_view"
         android:layout_width="210dp"
         android:layout_height="130dp"
         android:layout_marginTop="40dp"
-        android:importantForAccessibility="no"
+        android:drawableEnd="@drawable/ic_goku"
+        android:gravity="center"
+        android:text="@string/login_title"
+        android:textColor="@color/colorAccent"
+        android:textSize="40sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/loginTitleTextView"
-        android:layout_width="wrap_content"
+        style="@style/TitleStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="28dp"
-        android:text="@string/welcome"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:gravity="center"
+        android:text="@string/login_sub_title"
         android:textAllCaps="true"
-        android:textColor="@color/green_light"
-        android:textSize="40sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginLogoImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/login_title_text_view" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:gravity="center"
+        android:text="@string/login_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginTitleTextView" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        app:cardBackgroundColor="@color/green_card_color"
+        android:layout_marginEnd="@dimen/default_margin"
+        app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginTitleTextView">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp">
+            android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/loginUserTextInputLayout"
-                style="@style/GreenTextInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_email_24dp"
+                app:startIconTint="@color/blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/login_user_hint"
-                    android:inputType="textEmailAddress"
-                    android:imeOptions="actionNext" />
+                    android:hint="@string/login_email_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/loginPasswordTextInputLayout"
-                style="@style/GreenTextInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loginUserTextInputLayout"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                app:startIconDrawable="@drawable/ic_password_24dp"
+                app:startIconTint="@color/blue">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/loginButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="42dp"
                 android:text="@string/enter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,20 +126,18 @@
                 android:id="@+id/loginBiometricSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:checked="false"
                 android:gravity="center"
                 android:text="@string/login_activate_biometric_message"
-                android:textColor="@android:color/white"
-                app:track="@drawable/selector_switch_default"
+                android:textColor="@color/colorPrimaryDark"
                 android:textOff="@string/activate_biometric_negative_message"
                 android:textOn="@string/activate_biometric_positive_message"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="@+id/loginPasswordTextInputLayout"
                 app:layout_constraintStart_toStartOf="@+id/loginPasswordTextInputLayout"
-                app:layout_constraintTop_toBottomOf="@+id/loginPasswordTextInputLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/loginPasswordTextInputLayout"
+                app:track="@drawable/selector_switch_default" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

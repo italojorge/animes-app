@@ -1,10 +1,10 @@
 <resources>
-    <color name="colorPrimary">@android:color/black</color>
-    <color name="colorAccent">@color/animes_primary</color>
-    <color name="colorPrimaryDark">@color/green_dark</color>
+    <color name="colorPrimary">#00008B</color>
+    <color name="colorAccent">#00008B</color>
+    <color name="colorPrimaryDark">#040720</color>
 
-    <color name="green_dark">#062A1F</color>
+    <color name="blue">@android:color/holo_blue_dark</color>
+    <color name="beige">#ebe9d7</color>
     <color name="green_light">#85e5b0</color>
-    <color name="animes_primary">#317302</color>
-    <color name="green_card_color">#07434B</color>
+    <color name="green_dark">#062A1F</color>
 </resources>

@@ -1,6 +1,6 @@
 package br.com.animes.di
 
-object BuildConfigValues {
+object DIBuildConfigValues {
     lateinit var baseUrl: String
     var isDebug: Boolean = true
 }

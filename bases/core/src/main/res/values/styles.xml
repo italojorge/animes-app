@@ -1,28 +1,25 @@
 <resources>
-
-    <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowBackground">@android:color/white</item>
-    </style>
-
-    <style name="GreenTextInputLayout">
-        <item name="boxBackgroundColor">@color/green_light</item>
-        <item name="errorTextColor">@android:color/holo_red_light</item>
-    </style>
-
-    <style name="GreenTextInputLayoutErrorStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="errorTextColor">@android:color/black</item>
-    </style>
-
-    <style name="GreenTextViewTitle">
-        <item name="android:textSize">18sp</item>
+    <style name="ButtonStyle" parent="@style/Widget.MaterialComponents.Button">
+        <item name="cornerRadius">5dp</item>
+        <item name="android:minHeight">48dp</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">@color/blue</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:lineSpacingExtra">6sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

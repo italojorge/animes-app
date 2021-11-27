@@ -9,7 +9,7 @@ import br.com.animes.feature.auth.data.remote.service.LoginWebService
 import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.DoLogin
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPassword
-import br.com.animes.feature.auth.domain.use.cases.ValidateUser
+import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmail
 import br.com.animes.feature.auth.login.LoginViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -33,7 +33,7 @@ val authModule = module {
     }
 
     //DOMAIN
-    factory { ValidateUser() }
+    factory { ValidateUserEmail() }
 
     factory { ValidateAppPassword() }
 

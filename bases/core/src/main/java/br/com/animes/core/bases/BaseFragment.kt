@@ -6,11 +6,11 @@ import br.com.animes.domain.AnalyticsEvent
 import org.koin.android.ext.android.inject
 
 abstract class BaseFragment : Fragment() {
-    private val analyticsEvent: AnalyticsEvent by inject()
+//    private val analyticsEvent: AnalyticsEvent by inject()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        analyticsEvent.recordScreen(this::class.simpleName.orEmpty())
+//        analyticsEvent.recordScreen(this::class.simpleName.orEmpty())
     }
 }
 

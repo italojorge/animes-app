@@ -1,6 +1,7 @@
 import dependencies.androidx
 import dependencies.implementation
 import dependencies.koinAndroid
+import dependencies.lottieAnimations
 import dependencies.navigation
 
 plugins {
@@ -64,5 +65,6 @@ dependencies {
     androidx()
     koinAndroid()
     navigation()
+    lottieAnimations()
     implementation(project(ProjectModules.Root.DI))
 }

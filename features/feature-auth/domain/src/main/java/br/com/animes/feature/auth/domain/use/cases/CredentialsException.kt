@@ -7,8 +7,8 @@ sealed class CredentialsException(message: String, title: String? = null) :
     DomainException(message, title)
 
 class InvalidPasswordException : CredentialsException("Senha inválida.")
+class InvalidEmailException : CredentialsException("Email inválido.")
 class RepeatingPasswordException : CredentialsException("Senha inválida.")
-class PasswordNotMatchException : CredentialsException("Os campos diferem.")
 
 class LoginInvalidCredentialsException :
     CredentialsException("Dados inválidos. Confira novamente as informações inseridas.")

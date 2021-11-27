@@ -71,7 +71,7 @@ class LoginFragment : BaseFragment() {
         viewModel.passwordError.observe(owner) {
             binding.loginPasswordTextInputLayout.error = it.message
         }
-        viewModel.userError.observe(owner) {
+        viewModel.userEmailError.observe(owner) {
             binding.loginUserTextInputLayout.error = it.message
         }
         viewModel.hasCredentials.observe(owner) { hasCredentials ->

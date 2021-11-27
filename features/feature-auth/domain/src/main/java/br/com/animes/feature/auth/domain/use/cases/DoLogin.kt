@@ -5,7 +5,7 @@ import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.domain.utils.Result
 
 class DoLogin(
-    private val validateUserUseCase: ValidateUser,
+    private val validateUserEmailUseCase: ValidateUserEmail,
     private val validateAppPasswordUseCase: ValidateAppPassword,
     private val authRepository: AuthRepository
 ) : UseCase<UserCredentials, Unit>() {
@@ -13,11 +13,11 @@ class DoLogin(
         val validatePasswordResult = validateAppPasswordUseCase.execute(
             ValidateAppPassword.Params(password = param.password)
         )
-        val validateUserResult = validateUserUseCase.execute(
-            ValidateUser.Params(user = param.user)
+        val validateUserResult = validateUserEmailUseCase.execute(
+            ValidateUserEmail.Params(email = param.email)
         )
         return if (validatePasswordResult.isSuccess && validateUserResult.isSuccess) {
-            authRepository.doLogin(param.user, param.password)
+            authRepository.doLogin(param.email, param.password)
         } else {
             Result.failure(LoginInvalidCredentialsException())
         }

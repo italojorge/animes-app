@@ -23,8 +23,6 @@ object TestDependencies {
             "de.mannodermaus.junit5:android-test-runner:${Versioning.JUNIT_5_ANDROID_VERSION}"
 
         const val KOIN_TEST = "org.koin:koin-test:${DIDependencies.Versioning.KOIN_VERSION}"
-        const val COROUTINES_TEST =
-            "org.jetbrains.kotlinx:kotlinx-coroutines-test:${AndroidDependencies.Versioning.COROUTINES_VERSION}"
         const val ESPRESSO_CORE =
             "androidx.test.espresso:espresso-core:${Versioning.ESPRESSO_VERSION}"
         const val ESPRESSO_CONTRIB =
@@ -59,11 +57,6 @@ fun DependencyHandler.koinTest() {
 
 fun DependencyHandler.navigationTest() {
     androidTestImplementation(TestDependencies.Libs.ANDROIDX_NAVIGATION_TESTING)
-}
-
-fun DependencyHandler.coroutinesTest() {
-    testImplementation(TestDependencies.Libs.COROUTINES_TEST)
-    androidTestImplementation(TestDependencies.Libs.COROUTINES_TEST)
 }
 
 fun DependencyHandler.junit5() {

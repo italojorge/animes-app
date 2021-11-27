@@ -14,26 +14,26 @@ import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.DoLogin
 import br.com.animes.feature.auth.domain.use.cases.UserCredentials
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPassword
-import br.com.animes.feature.auth.domain.use.cases.ValidateUser
+import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmail
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val validateUserUseCase: ValidateUser,
+    private val validateUserEmailUseCase: ValidateUserEmail,
     private val validateAppPasswordUseCase: ValidateAppPassword,
     private val doLoginUseCase: DoLogin,
     private val authRepository: AuthRepository,
     private val dispatcher: CoroutineContext = Dispatchers.Main
 ) : ViewModel() {
     private val _loginViewState = SingleLiveDataEvent<ViewState<Unit>>()
-    private val _userError = MutableLiveData<Throwable>()
+    private val _userEmailError = MutableLiveData<Throwable>()
     private val _passwordError = MutableLiveData<Throwable>()
     private val _hasCredentials = MutableLiveData<Boolean>()
     private val _userEmail = SingleLiveDataEvent<String>()
 
     val loginViewState: LiveData<ViewState<Unit>> = _loginViewState
-    val userError: LiveData<Throwable> = _userError
+    val userEmailError: LiveData<Throwable> = _userEmailError
     val passwordError: LiveData<Throwable> = _passwordError
     val hasCredentials: LiveData<Boolean> = _hasCredentials
     val userEmail: LiveData<String> = _userEmail
@@ -99,10 +99,10 @@ class LoginViewModel(
     }
 
     private suspend fun validateUser(user: String): Result<Unit> {
-        return validateUserUseCase.execute(
-            ValidateUser.Params(user)
-        ).onFailure { error ->
-            _userError.postValue(error)
+        return validateUserEmailUseCase.execute(
+            ValidateUserEmail.Params(user)
+        ).onFailure {
+            _userEmailError.postValue(it)
         }
     }
 }

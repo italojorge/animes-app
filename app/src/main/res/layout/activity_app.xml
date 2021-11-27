@@ -5,9 +5,9 @@
     android:id="@+id/baseContainer"
     android:name="androidx.navigation.fragment.NavHostFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-<!--    android:background="@drawable/shape_gradient_dark_green"-->
-<!--    android:orientation="vertical"-->
-<!--    app:defaultNavHost="true"-->
-<!--    app:navGraph="@navigation/auth_navigation"-->
-<!--    tools:context=".app.AppActivity" />-->
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/auth_navigation"
+    tools:context=".app.AppActivity" />

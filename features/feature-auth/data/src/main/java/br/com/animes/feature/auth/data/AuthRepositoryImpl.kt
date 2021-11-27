@@ -15,7 +15,7 @@ class AuthRepositoryImpl(
     override suspend fun doLogin(): Result<Unit> {
         val userCredentials = localDataSource.getCredentials().getOrNull()
         val loginResult = remoteDataSource.doLogin(
-            userCredentials?.user.orEmpty(),
+            userCredentials?.email.orEmpty(),
             userCredentials?.password.orEmpty()
         )
         if (loginResult.isSuccess) localDataSource.saveSession(loginResult.getOrNull().orEmpty())
