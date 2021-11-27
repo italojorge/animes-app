@@ -9,7 +9,7 @@ import kotlinx.coroutines.delay
 
 class SplashScreenActivity : AppCompatActivity() {
     private companion object {
-        const val SPLASH_ANIMATION_DURATION = 5000L
+        const val SPLASH_ANIMATION_DURATION = 3000L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
         lifecycle.coroutineScope.launchWhenCreated {
             delay(SPLASH_ANIMATION_DURATION)
             startActivity(Intent(this@SplashScreenActivity, AppActivity::class.java))
+            finish()
         }
     }
 }

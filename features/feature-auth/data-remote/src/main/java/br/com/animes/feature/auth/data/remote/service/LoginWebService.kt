@@ -5,6 +5,8 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface LoginWebService {
-    @POST("v1/auth/login")
-    suspend fun doLogin(@Header("Authorization") basicAuth: String): LoginResponse
+    @POST("https://app.fakejson.com/q/2SkehilJ?token=Ld9SwOFUDuYzrc_KkEF5fg")
+    suspend fun doLogin(
+        @Header("Authorization") basicAuth: String
+    ): LoginResponse
 }

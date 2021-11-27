@@ -4,7 +4,7 @@ import java.util.regex.Pattern
 
 fun String.isRepeating() = toCharArray().toSet().size == 1
 
-fun String.isEmail() = EMAIL_ADDRESS.matcher(this).matches()
+fun String.isNotEmail() = EMAIL_ADDRESS.matcher(this).matches().not()
 
 private val EMAIL_ADDRESS: Pattern = Pattern.compile(
     "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +

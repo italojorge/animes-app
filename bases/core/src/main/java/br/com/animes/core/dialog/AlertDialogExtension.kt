@@ -12,7 +12,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 object AlertDialogExtension : KoinComponent {
-    private val analyticsEvent: AnalyticsEvent by inject()
+//    private val analyticsEvent: AnalyticsEvent by inject()
 
     fun Context.showAlert(
         title: CharSequence,
@@ -66,7 +66,7 @@ object AlertDialogExtension : KoinComponent {
                 .create()
                 .show()
         } catch (e: Exception) {
-            analyticsEvent.recordException(e)
+//            analyticsEvent.recordException(e)
         }
     }
 }

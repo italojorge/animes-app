@@ -1,7 +1,7 @@
 <resources>
     <color name="colorPrimary">#00008B</color>
-    <color name="colorAccent">#00008B</color>
-    <color name="colorPrimaryDark">#040720</color>
+    <color name="colorAccent">@android:color/holo_blue_dark</color>
+    <color name="colorPrimaryDark">#00008B</color>
 
     <color name="blue">@android:color/holo_blue_dark</color>
     <color name="beige">#ebe9d7</color>

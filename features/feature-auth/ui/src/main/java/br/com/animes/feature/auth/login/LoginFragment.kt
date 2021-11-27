@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import br.com.animes.core.bases.BaseFragment
@@ -46,11 +47,11 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun setupView() {
-        binding.loginUserTextInputLayout.cleanErrorTextAfterTextChanged()
+        binding.loginEmailTextInputLayout.cleanErrorTextAfterTextChanged()
         binding.loginPasswordTextInputLayout.cleanErrorTextAfterTextChanged()
 
-        binding.loginButton.setOnClickListener {
-            val userEditText = binding.loginUserTextInputLayout.editText
+        binding.loginLoadingButton.setOnClickListener {
+            val userEditText = binding.loginEmailTextInputLayout.editText
             val passwordEditText = binding.loginPasswordTextInputLayout.editText
             viewModel.doLogin(
                 user = userEditText?.text?.toString().orEmpty(),
@@ -63,16 +64,20 @@ class LoginFragment : BaseFragment() {
     private fun addObservers(owner: LifecycleOwner) {
         viewModel.loginViewState.observe(owner) { viewState ->
             viewState.handleIt(
-                onSuccess = { navigation.navigateToChangePassword() },
+                onSuccess = {
+                    Toast.makeText(requireContext(), "Sucesso", Toast.LENGTH_LONG).show()
+                },
                 onFailure = { showErrorAlert(it) },
-                isLoading = { }
+                isLoading = {
+                    binding.loginLoadingButton.isLoading = it
+                }
             )
         }
         viewModel.passwordError.observe(owner) {
             binding.loginPasswordTextInputLayout.error = it.message
         }
         viewModel.userEmailError.observe(owner) {
-            binding.loginUserTextInputLayout.error = it.message
+            binding.loginEmailTextInputLayout.error = it.message
         }
         viewModel.hasCredentials.observe(owner) { hasCredentials ->
             binding.loginBiometricSwitch.isVisible =
@@ -80,7 +85,7 @@ class LoginFragment : BaseFragment() {
             if (hasCredentials) biometricAuth.authenticate(::handleBiometricAuthResult)
         }
         viewModel.userEmail.observe(owner) {
-            binding.loginUserTextInputLayout.editText?.setText(it)
+            binding.loginEmailTextInputLayout.editText?.setText(it)
         }
     }
 
