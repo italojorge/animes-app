@@ -1,6 +1,4 @@
 object ProjectConfig {
-    const val teste = ":app"
-
     const val KOTLIN_VERSION = "1.6.0"
 
     object BuildPlugins {

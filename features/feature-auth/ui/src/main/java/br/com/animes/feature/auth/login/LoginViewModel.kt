@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.animes.base.feature.utils.livedata.*
-import br.com.animes.domain.interactor.credentials.DoLogin
-import br.com.animes.domain.interactor.credentials.UserCredentials
-import br.com.animes.domain.interactor.credentials.ValidateAppPassword
-import br.com.animes.domain.interactor.credentials.ValidateUser
-import br.com.animes.domain.repository.AuthRepository
+import br.com.animes.core.utils.livedata.SingleLiveDataEvent
+import br.com.animes.core.utils.livedata.ViewState
+import br.com.animes.core.utils.livedata.postFailure
+import br.com.animes.core.utils.livedata.postLoading
+import br.com.animes.core.utils.livedata.postSuccess
 import br.com.animes.domain.utils.Result
+import br.com.animes.feature.auth.domain.repository.AuthRepository
+import br.com.animes.feature.auth.domain.use.cases.DoLogin
+import br.com.animes.feature.auth.domain.use.cases.UserCredentials
+import br.com.animes.feature.auth.domain.use.cases.ValidateAppPassword
+import br.com.animes.feature.auth.domain.use.cases.ValidateUser
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class LoginViewModel(
     private val validateUserUseCase: ValidateUser,

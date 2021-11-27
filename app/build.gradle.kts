@@ -1,4 +1,7 @@
-import dependencies.*
+import dependencies.androidx
+import dependencies.implementation
+import dependencies.koinAndroid
+import dependencies.navigation
 
 plugins {
     id("com.android.application")
@@ -35,15 +38,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-
     flavorDimensions.add("default")
 
     productFlavors {
@@ -68,6 +62,7 @@ android {
 
 dependencies {
     androidx()
-    koin()
+    koinAndroid()
     navigation()
+    implementation(project(ProjectModules.Root.DI))
 }

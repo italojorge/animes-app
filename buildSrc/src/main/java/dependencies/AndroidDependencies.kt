@@ -3,10 +3,7 @@ package dependencies
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object AndroidDependencies {
-    const val teste = ":app:"
-
     object Versioning {
-        const val KOIN_VERSION = "3.1.3"
         const val APP_COMPAT_VERSION = "1.4.0"
 
         const val LIFECYCLE_VERSION = "2.4.0"
@@ -22,9 +19,6 @@ object AndroidDependencies {
     object Libs {
         const val APP_COMPAT = "androidx.appcompat:appcompat:${Versioning.APP_COMPAT_VERSION}"
         const val APP_COMPAT_RESOURCES = "androidx.appcompat:appcompat-resources:${Versioning.APP_COMPAT_VERSION}"
-
-        const val KOIN_CORE = "io.insert-koin:koin-core:${Versioning.KOIN_VERSION}"
-        const val KOIN_ANDROID = "io.insert-koin:koin-android:${Versioning.KOIN_VERSION}"
 
         const val CORE_KTX = "androidx.core:core-ktx:${Versioning.CORE_KTX_VERSION}"
         const val MULTIDEX = "androidx.multidex:multidex:${Versioning.MULTIDEX_VERSION}"
@@ -60,7 +54,7 @@ fun DependencyHandler.androidx() {
 fun DependencyHandler.lifecycle() {
     implementation(AndroidDependencies.Libs.LIFECYCLE_VIEW_MODEL)
     implementation(AndroidDependencies.Libs.LIFECYCLE_LIVE_DATA)
-    implementation(AndroidDependencies.Libs.LIFECYCLE_RUNTIME)
+//    implementation(AndroidDependencies.Libs.LIFECYCLE_RUNTIME)
 }
 
 fun DependencyHandler.navigation() {
@@ -70,11 +64,6 @@ fun DependencyHandler.navigation() {
 
 fun DependencyHandler.biometric() {
     implementation(AndroidDependencies.Libs.BIOMETRIC)
-}
-
-fun DependencyHandler.koin() {
-    implementation(AndroidDependencies.Libs.KOIN_CORE)
-    implementation(AndroidDependencies.Libs.KOIN_ANDROID)
 }
 
 fun DependencyHandler.coroutines() {

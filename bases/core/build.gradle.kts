@@ -1,6 +1,6 @@
 import dependencies.androidx
 import dependencies.api
-import dependencies.koin
+import dependencies.koinAndroid
 
 plugins {
     id("com.android.library")
@@ -34,6 +34,6 @@ android {
 
 dependencies {
     androidx()
-    koin()
-    api(project(":bases:base-domain"))
+    koinAndroid()
+    api(project(ProjectModules.Base.DOMAIN))
 }

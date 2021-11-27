@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
-import br.com.animes.base.feature.core.BaseFragment
-import br.com.animes.base.feature.dialog.AlertDialogExtension.showErrorAlert
-import br.com.animes.base.feature.utils.extensions.cleanErrorTextAfterTextChanged
-import br.com.animes.base.feature.utils.navigation.navDirections
-import br.com.animes.base.feature.utils.viewbinding.viewBinding
+import br.com.animes.core.bases.BaseFragment
+import br.com.animes.core.dialog.AlertDialogExtension.showErrorAlert
+import br.com.animes.core.utils.extensions.cleanErrorTextAfterTextChanged
+import br.com.animes.core.utils.navigation.navDirections
+import br.com.animes.core.utils.viewbinding.viewBinding
 import br.com.animes.feature.auth.biometric.AuthenticationResult
 import br.com.animes.feature.auth.biometric.BiometricAuthenticator
 import br.com.animes.feature.auth.biometric.BiometricChecker
@@ -65,7 +65,7 @@ class LoginFragment : BaseFragment() {
             viewState.handleIt(
                 onSuccess = { navigation.navigateToChangePassword() },
                 onFailure = { showErrorAlert(it) },
-                isLoading = {  }
+                isLoading = { }
             )
         }
         viewModel.passwordError.observe(owner) {

@@ -22,7 +22,7 @@ object TestDependencies {
         const val JUNIT5_ANDROID_RUNNER =
             "de.mannodermaus.junit5:android-test-runner:${Versioning.JUNIT_5_ANDROID_VERSION}"
 
-        const val KOIN_TEST = "org.koin:koin-test:${AndroidDependencies.Versioning.KOIN_VERSION}"
+        const val KOIN_TEST = "org.koin:koin-test:${DIDependencies.Versioning.KOIN_VERSION}"
         const val COROUTINES_TEST =
             "org.jetbrains.kotlinx:kotlinx-coroutines-test:${AndroidDependencies.Versioning.COROUTINES_VERSION}"
         const val ESPRESSO_CORE =

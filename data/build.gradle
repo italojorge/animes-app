@@ -1,7 +1,0 @@
-apply from: "../android-library-module.gradle"
-
-dependencies {
-    api project(':bases:base-domain')
-    implementation platform(firebaseBoM)
-    dataDependencies.each { add(it.configuration, it.dependency, it.options) }
-}
