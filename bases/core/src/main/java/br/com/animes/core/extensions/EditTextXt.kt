@@ -1,4 +1,4 @@
-package br.com.animes.core.utils.extensions
+package br.com.animes.core.extensions
 
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged

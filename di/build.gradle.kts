@@ -43,4 +43,9 @@ dependencies {
     implementation(project(ProjectModules.Feature.AUTH.DOMAIN))
     implementation(project(ProjectModules.Feature.AUTH.DATA))
     implementation(project(ProjectModules.Feature.AUTH.DATA_REMOTE))
+
+    implementation(project(ProjectModules.Feature.HOME.UI))
+    implementation(project(ProjectModules.Feature.HOME.DOMAIN))
+    implementation(project(ProjectModules.Feature.HOME.DATA))
+    implementation(project(ProjectModules.Feature.HOME.DATA_REMOTE))
 }

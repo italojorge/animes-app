@@ -27,7 +27,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
+        android:id="@+id/home_horizontal_scroll_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
@@ -35,34 +35,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/home_title_text_view">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/home_chip_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:singleLine="true" />
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
     </HorizontalScrollView>
 
     <TextView
+        android:id="@+id/home_title_text_view"
         style="@style/TextStyle"
-        android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
         android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
-        android:text="Selecione abaixo uma das opções para filtrar a lista de animes:"
+        android:text="@string/home_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_app_bar_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/home_horizontal_scroll_view"
+        tools:listitem="@layout/item_anime" />
 </androidx.constraintlayout.widget.ConstraintLayout>

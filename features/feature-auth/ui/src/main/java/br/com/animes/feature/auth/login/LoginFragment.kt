@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import br.com.animes.core.bases.BaseFragment
 import br.com.animes.core.dialog.AlertDialogExtension.showErrorAlert
-import br.com.animes.core.utils.extensions.cleanErrorTextAfterTextChanged
+import br.com.animes.core.extensions.cleanErrorTextAfterTextChanged
 import br.com.animes.core.utils.navigation.navDirections
 import br.com.animes.core.utils.viewbinding.viewBinding
 import br.com.animes.feature.auth.biometric.AuthenticationResult

@@ -1,5 +1,6 @@
 import dependencies.androidx
 import dependencies.api
+import dependencies.glide
 import dependencies.koinAndroid
 
 plugins {
@@ -35,5 +36,6 @@ android {
 dependencies {
     androidx()
     koinAndroid()
+    glide()
     api(project(ProjectModules.Base.DOMAIN))
 }

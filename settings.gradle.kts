@@ -12,5 +12,6 @@ include(
     ":features:feature-auth:data-remote",
     ":features:feature-home:ui",
     ":features:feature-home:data",
-    ":features:feature-home:domain"
+    ":features:feature-home:domain",
+    ":features:feature-home:data-remote"
 )

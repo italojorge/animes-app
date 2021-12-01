@@ -17,6 +17,8 @@ object AndroidDependencies {
         const val LOTTIE_ANIMATIONS_VERSION = "4.2.1"
         const val PAGING_VERSION = "3.1.0"
         const val COROUTINES_VERSION = "1.5.2"
+
+        const val GLIDE_VERSION = "4.12.0"
     }
 
     object Libs {
@@ -39,6 +41,10 @@ object AndroidDependencies {
         const val PAGING_RUNTIME = "androidx.paging:paging-runtime-ktx:${Versioning.PAGING_VERSION}"
         const val COROUTINES_CORE =
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versioning.COROUTINES_VERSION}"
+        const val GLIDE =
+            "com.github.bumptech.glide:glide:${Versioning.GLIDE_VERSION}"
+        const val GLIDE_ANNOTATION_PROCESSOR =
+            "com.github.bumptech.glide:compiler:${Versioning.GLIDE_VERSION}"
     }
 }
 
@@ -66,6 +72,11 @@ fun DependencyHandler.biometric() {
 
 fun DependencyHandler.coroutines() {
     implementation(AndroidDependencies.Libs.COROUTINES_CORE)
+}
+
+fun DependencyHandler.glide() {
+    implementation(AndroidDependencies.Libs.GLIDE)
+    annotationProcessor(AndroidDependencies.Libs.GLIDE_ANNOTATION_PROCESSOR)
 }
 
 fun DependencyHandler.paging() {

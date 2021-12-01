@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/default_margin"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="@dimen/default_margin"
+    android:layout_marginBottom="4dp"
     app:cardBackgroundColor="@color/beige_light"
     app:cardCornerRadius="8dp">
 
@@ -30,11 +34,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             app:layout_constraintEnd_toStartOf="@+id/item_anime_score_text_view"
             app:layout_constraintStart_toEndOf="@+id/item_anime_image_view"
-            app:layout_constraintTop_toTopOf="@+id/item_anime_image_view"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Fullmetal Alchemist: Brotherhood" />
 
         <TextView

@@ -11,12 +11,12 @@ fun DependencyHandler.implementation(depName: Dependency) {
     add("implementation", depName)
 }
 
-fun DependencyHandler.releaseImplementation(depName: String) {
-    add("releaseImplementation", depName)
+fun DependencyHandler.annotationProcessor(depName: String) {
+    add("annotationProcessor", depName)
 }
 
-fun DependencyHandler.debugImplementation(depName: String) {
-    add("debugImplementation", depName)
+fun DependencyHandler.annotationProcessor(depName: Dependency) {
+    add("annotationProcessor", depName)
 }
 
 fun DependencyHandler.api(depName: String) {

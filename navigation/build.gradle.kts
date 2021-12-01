@@ -1,5 +1,6 @@
 import dependencies.androidx
 import dependencies.koinAndroid
+import dependencies.navigation
 
 plugins {
     id("com.android.library")

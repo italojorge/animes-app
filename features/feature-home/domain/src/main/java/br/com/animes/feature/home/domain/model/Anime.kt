@@ -1,13 +1,14 @@
 package br.com.animes.feature.home.domain.model
 
 data class Anime(
-    val id: Int,
+    val id: Long,
     val rank: Long,
     val title: String,
-    val image_url: String,
+    val imageUrl: String,
     val type: String,
-    val episodes: Int,
-    val start_date: String,
-    val end_date: String,
+    val episodes: Long?,
+    val startDate: String?,
+    val endDate: String?,
     val members: Long,
+    val score: Double
 )

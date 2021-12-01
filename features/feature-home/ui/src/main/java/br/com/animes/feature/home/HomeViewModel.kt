@@ -13,15 +13,20 @@ class HomeViewModel(private val repository: AnimesRepository) : ViewModel() {
 
     private var currentSearchResult: Flow<PagingData<Anime>>? = null
 
-    fun getAnimesByQuery(queryString: String): Flow<PagingData<Anime>> {
-        val lastResult = currentSearchResult
-        if (queryString == currentQueryValue && lastResult != null) {
-            return lastResult
-        }
-        currentQueryValue = queryString
-        val newResult: Flow<PagingData<Anime>> = repository.getAnimesByQuery(currentQueryValue)
+//    fun getAnimesByQuery(queryString: String): Flow<PagingData<Anime>> {
+//        val lastResult = currentSearchResult
+//        if (queryString == currentQueryValue && lastResult != null) {
+//            return lastResult
+//        }
+//        currentQueryValue = queryString
+//        val newResult: Flow<PagingData<Anime>> = repository.getAnimesByQuery(currentQueryValue)
+//            .cachedIn(viewModelScope)
+//        currentSearchResult = newResult
+//        return newResult
+//    }
+
+    fun getAnimesByFilter(filterName: String): Flow<PagingData<Anime>> {
+        return repository.getAnimesByFilter(filterName)
             .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
     }
 }

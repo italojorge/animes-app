@@ -1,15 +1,17 @@
-package br.com.animes.feature.home.data
+package br.com.animes.feature.home.data.paging.factory
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import br.com.animes.feature.home.data.AnimesRemoteDataSource
 import br.com.animes.feature.home.domain.model.Anime
 
-class AnimesPagingSourceFactory(
-    private val remoteDataSource: AnimesRemoteDataSource
+class AnimesByQueryPagingSourceFactory(
+    private val remoteDataSource: AnimesRemoteDataSource,
+    private val query: String
 ) : PagingSource<Int, Anime>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Anime> {
         val position = params.key ?: ANIME_LIST_STARTING_PAGE_INDEX
-        val result = remoteDataSource.requestAnimeList(position)
+        val result = remoteDataSource.requestAnimeListByQuery(query, position)
         return if (result.isSuccess) {
             val animeList = result.getOrNull()
             val nextKey = if (animeList.isNullOrEmpty()) {

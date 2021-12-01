@@ -1,4 +1,4 @@
-package br.com.animes.core.utils.extensions
+package br.com.animes.core.extensions
 
 import android.content.*
 import android.content.pm.PackageManager
