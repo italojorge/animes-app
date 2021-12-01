@@ -9,5 +9,5 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     app:defaultNavHost="true"
-    app:navGraph="@navigation/auth_navigation"
+    app:navGraph="@navigation/global_navigation"
     tools:context=".app.AppActivity" />

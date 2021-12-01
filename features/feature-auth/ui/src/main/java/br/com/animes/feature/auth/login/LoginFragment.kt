@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import br.com.animes.core.bases.BaseFragment
@@ -23,7 +22,7 @@ import org.koin.core.parameter.parametersOf
 
 class LoginFragment : BaseFragment() {
     private var binding: FragmentLoginBinding by viewBinding()
-    private val navigation: AuthNavigation by navDirections()
+    private val authNavigation: AuthNavigation by navDirections()
     private val viewModel: LoginViewModel by viewModel()
 
     private val biometricAuth: BiometricAuthenticator by inject { parametersOf(this) }
@@ -65,7 +64,7 @@ class LoginFragment : BaseFragment() {
         viewModel.loginViewState.observe(owner) { viewState ->
             viewState.handleIt(
                 onSuccess = {
-                    Toast.makeText(requireContext(), "Sucesso", Toast.LENGTH_LONG).show()
+                    authNavigation.navigateToHome()
                 },
                 onFailure = { showErrorAlert(it) },
                 isLoading = {

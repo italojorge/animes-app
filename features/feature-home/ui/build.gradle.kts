@@ -1,9 +1,14 @@
 import dependencies.androidx
-import dependencies.koin
+import dependencies.biometric
+import dependencies.implementation
+import dependencies.koinAndroid
+import dependencies.lifecycle
+import dependencies.pagingAndroid
 
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -25,9 +30,19 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+    api(project(ProjectModules.Base.CORE))
+    implementation(project(ProjectModules.Base.DOMAIN))
+    implementation(project(ProjectModules.Feature.HOME.DOMAIN))
+    koinAndroid()
+    pagingAndroid()
     androidx()
-    koin()
+    lifecycle()
+    biometric()
 }

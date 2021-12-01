@@ -12,7 +12,7 @@ import br.com.animes.core.utils.livedata.postSuccess
 import br.com.animes.domain.utils.Result
 import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.DoLogin
-import br.com.animes.feature.auth.domain.use.cases.UserCredentials
+import br.com.animes.feature.auth.domain.model.UserCredentials
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPassword
 import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmail
 import kotlin.coroutines.CoroutineContext

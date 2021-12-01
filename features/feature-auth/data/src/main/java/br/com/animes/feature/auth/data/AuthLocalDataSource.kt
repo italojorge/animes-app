@@ -1,7 +1,7 @@
 package br.com.animes.feature.auth.data
 
 import br.com.animes.domain.utils.Result
-import br.com.animes.feature.auth.domain.use.cases.UserCredentials
+import br.com.animes.feature.auth.domain.model.UserCredentials
 
 interface AuthLocalDataSource {
     fun saveSession(sessionData: String)

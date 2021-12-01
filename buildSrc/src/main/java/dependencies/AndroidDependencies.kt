@@ -13,7 +13,10 @@ object AndroidDependencies {
         const val BIOMETRIC_VERSION = "1.1.0"
         const val MULTIDEX_VERSION = "2.0.1"
         const val MATERIAL_DESIGN_VERSION = "1.4.0"
+
         const val LOTTIE_ANIMATIONS_VERSION = "4.2.1"
+        const val PAGING_VERSION = "3.1.0"
+        const val COROUTINES_VERSION = "1.5.2"
     }
 
     object Libs {
@@ -32,6 +35,10 @@ object AndroidDependencies {
             "androidx.navigation:navigation-ui-ktx:${Versioning.NAVIGATION_VERSION}"
         const val MATERIAL_DESIGN = "com.google.android.material:material:${Versioning.MATERIAL_DESIGN_VERSION}"
         const val LOTTIE_ANIMATIONS = "com.airbnb.android:lottie:${Versioning.LOTTIE_ANIMATIONS_VERSION}"
+        const val PAGING_COMMON = "androidx.paging:paging-common-ktx:${Versioning.PAGING_VERSION}"
+        const val PAGING_RUNTIME = "androidx.paging:paging-runtime-ktx:${Versioning.PAGING_VERSION}"
+        const val COROUTINES_CORE =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versioning.COROUTINES_VERSION}"
     }
 }
 
@@ -55,6 +62,19 @@ fun DependencyHandler.navigation() {
 
 fun DependencyHandler.biometric() {
     implementation(AndroidDependencies.Libs.BIOMETRIC)
+}
+
+fun DependencyHandler.coroutines() {
+    implementation(AndroidDependencies.Libs.COROUTINES_CORE)
+}
+
+fun DependencyHandler.paging() {
+    implementation(AndroidDependencies.Libs.PAGING_COMMON)
+}
+
+fun DependencyHandler.pagingAndroid() {
+    implementation(AndroidDependencies.Libs.PAGING_COMMON)
+    implementation(AndroidDependencies.Libs.PAGING_RUNTIME)
 }
 
 fun DependencyHandler.lottieAnimations() {

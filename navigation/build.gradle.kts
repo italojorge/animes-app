@@ -28,6 +28,9 @@ android {
 }
 
 dependencies {
+    implementation(project(ProjectModules.Feature.AUTH.UI))
+    implementation(project(ProjectModules.Feature.HOME.UI))
+    navigation()
     androidx()
     koinAndroid()
 }

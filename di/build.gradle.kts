@@ -34,8 +34,10 @@ dependencies {
     biometric()
     implementation(project(ProjectModules.Base.DOMAIN))
     implementation(project(ProjectModules.Base.DATA_REMOTE))
-    implementation(project(ProjectModules.Root.DATA_LOCAL))
     implementation(project(ProjectModules.Base.CORE))
+
+    implementation(project(ProjectModules.Root.DATA_LOCAL))
+    implementation(project(ProjectModules.Root.NAVIGATION))
 
     implementation(project(ProjectModules.Feature.AUTH.UI))
     implementation(project(ProjectModules.Feature.AUTH.DOMAIN))

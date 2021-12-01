@@ -6,7 +6,7 @@ import br.com.animes.base.data.remote.factory.UserSessionManager
 import br.com.animes.base.data.remote.utils.fromJsonOrNull
 import br.com.animes.domain.utils.Result
 import br.com.animes.feature.auth.data.AuthLocalDataSource
-import br.com.animes.feature.auth.domain.use.cases.UserCredentials
+import br.com.animes.feature.auth.domain.model.UserCredentials
 import com.google.gson.Gson
 
 class UserAuthLocalImpl(context: Context) : UserSessionManager, AuthLocalDataSource {

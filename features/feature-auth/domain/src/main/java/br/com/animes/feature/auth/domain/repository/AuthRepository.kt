@@ -1,7 +1,7 @@
 package br.com.animes.feature.auth.domain.repository
 
 import br.com.animes.domain.utils.Result
-import br.com.animes.feature.auth.domain.use.cases.UserCredentials
+import br.com.animes.feature.auth.domain.model.UserCredentials
 
 interface AuthRepository {
     suspend fun doLogin(user: String, password: String): Result<Unit>

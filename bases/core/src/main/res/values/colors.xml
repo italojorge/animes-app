@@ -5,6 +5,7 @@
 
     <color name="blue">@android:color/holo_blue_dark</color>
     <color name="beige">#ebe9d7</color>
+    <color name="beige_light">#FDFCFB</color>
     <color name="green_light">#85e5b0</color>
     <color name="green_dark">#062A1F</color>
 </resources>

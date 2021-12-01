@@ -3,6 +3,7 @@ package br.com.animes.feature.auth.domain.use.cases
 import br.com.animes.domain.core.UseCase
 import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.domain.utils.Result
+import br.com.animes.feature.auth.domain.model.UserCredentials
 
 class DoLogin(
     private val validateUserEmailUseCase: ValidateUserEmail,

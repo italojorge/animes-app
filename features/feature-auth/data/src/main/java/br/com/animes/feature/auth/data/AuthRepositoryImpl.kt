@@ -2,7 +2,7 @@ package br.com.animes.feature.auth.data
 
 import br.com.animes.domain.utils.Result
 import br.com.animes.feature.auth.domain.repository.AuthRepository
-import br.com.animes.feature.auth.domain.use.cases.UserCredentials
+import br.com.animes.feature.auth.domain.model.UserCredentials
 
 class AuthRepositoryImpl(
     private val remoteDataSource: AuthRemoteDataSource,

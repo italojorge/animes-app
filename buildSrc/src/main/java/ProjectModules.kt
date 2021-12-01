@@ -2,6 +2,7 @@ object ProjectModules {
     object Root{
         const val DATA_LOCAL = ":data-local"
         const val DI = ":di"
+        const val NAVIGATION = ":navigation"
     }
 
     object Feature {
