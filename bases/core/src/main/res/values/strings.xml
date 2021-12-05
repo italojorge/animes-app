@@ -1,11 +1,3 @@
 <resources>
-    <string name="enterprise_name" translatable="false">animes</string>
-    <string name="default_currency_formatter">R$%1$s</string>
-    <string name="send_to">Compartilhar</string>
-    <string name="search">Pesquisar</string>
     <string name="dialog_ok_button_message">OK</string>
-
-    <string name="critical_update_app_title">Atualize seu aplicativo</string>
-    <string name="critical_update_app_message">Baixe agora a nova versão do aplicativo animes na Play Store para continuar utilizando :)</string>
-    <string name="critical_update_app_ok_button_message">Atualizar</string>
 </resources>

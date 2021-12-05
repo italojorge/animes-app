@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home_toolbar_title">Top Animes</string>
-    <string name="access_home_deeplink">android-app://animes.com.br/home</string>
-    <string name="home_title">Busque um anime por seu título ou Selecione abaixo uma das opções para filtrar a lista de animes:</string>
-    <string name="item_home_type_and_episodes_format">%1s (%2s eps)</string>
+    <string name="access_home_deeplink" translatable="false">android-app://animes.com.br/home</string>
+    <string name="home_toolbar_title" translatable="false">Top Animes</string>
+    <string name="home_title">Search an anime by its title or Select one of the options below to filter the anime list:</string>
+    <string name="item_home_type_and_episodes_format" translatable="false">%1s (%2s eps)</string>
     <string name="item_home_members_format">%s members</string>
-    <string name="search_menu_title">Pesquisar</string>
-    <string name="home_menu_search_view_hint">Pesquisar Anime</string>
+    <string name="home_menu_search_view_hint">Search Anime</string>
+    <string name="anime_details_toolbar_title">Anime Details</string>
 </resources>

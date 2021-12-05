@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Busque um anime por seu título ou Selecione abaixo uma das opções para filtrar a lista de animes:</string>
+    <string name="item_home_members_format">%s membros</string>
+    <string name="home_menu_search_view_hint">Pesquisar Anime</string>
+    <string name="anime_details_toolbar_title">Detalhes do anime</string>
+    <string name="information">Informações</string>
+</resources>

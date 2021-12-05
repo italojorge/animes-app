@@ -87,15 +87,6 @@ fun Fragment.openPackageInStore(packageName: String) = try {
 fun Fragment.getColor(@ColorRes colorId: Int) = ContextCompat.getColor(requireContext(), colorId)
 fun Fragment.getDrawable(@ColorRes drawableId: Int) = ContextCompat.getColor(requireContext(), drawableId)
 
-fun Fragment.openShareIntent(message: String) {
-    val sendIntent: Intent = Intent().apply {
-        action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_TEXT, message)
-        type = "text/plain"
-    }
-    startActivity(Intent.createChooser(sendIntent, resources.getText(R.string.send_to)))
-}
-
 fun Fragment.copyToClipboard(text: String, label: String = "clipboard") {
     val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     clipboard.setPrimaryClip(ClipData.newPlainText(label, text))

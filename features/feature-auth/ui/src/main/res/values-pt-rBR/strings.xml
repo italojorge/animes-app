@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_title">Animes App</string>
+    <string name="login_sub_title">Bem-vindo ao Animes App</string>
+    <string name="login_description">Aqui você pode consultar os animes de sua preferência e visualizar seus detalhes!</string>
+    <string name="login_activate_biometric_message">Leitor de Digital</string>
+    <string name="biometric_dialog_negative_text">Cancelar</string>
+    <string name="biometric_dialog_title">Confirme sua Digital</string>
+    <string name="activate_biometric_negative_message">Não</string>
+    <string name="activate_biometric_positive_message">Sim</string>
+</resources>

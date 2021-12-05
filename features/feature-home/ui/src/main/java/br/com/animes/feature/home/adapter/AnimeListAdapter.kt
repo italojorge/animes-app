@@ -8,9 +8,9 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.animes.core.extensions.loadImageFromUrl
+import br.com.animes.feature.home.R
+import br.com.animes.feature.home.databinding.ItemAnimeBinding
 import br.com.animes.feature.home.domain.model.Anime
-import br.com.animes.feature.main.R
-import br.com.animes.feature.main.databinding.ItemAnimeBinding
 
 class AnimeListAdapter(
     private val onAnimeClick: OnAnimeClick

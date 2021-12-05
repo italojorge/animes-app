@@ -20,11 +20,10 @@ import br.com.animes.core.extensions.hideKeyboard
 import br.com.animes.core.extensions.scrollToTop
 import br.com.animes.core.utils.viewbinding.viewBinding
 import br.com.animes.feature.home.adapter.AnimeListAdapter
+import br.com.animes.feature.home.databinding.FragmentHomeBinding
+import br.com.animes.feature.home.databinding.SingleChipLayoutBinding
 import br.com.animes.feature.home.domain.model.Anime
 import br.com.animes.feature.home.domain.model.FilterTopAnimesEnum
-import br.com.animes.feature.main.R
-import br.com.animes.feature.main.databinding.FragmentHomeBinding
-import br.com.animes.feature.main.databinding.SingleChipLayoutBinding
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -121,10 +120,9 @@ class HomeFragment : BaseFragment() {
     private fun searchAnimeListByQuery(queryText: String) {
         lifecycleScope.launch { adapter.resetList() }
         searchJob?.cancel()
-        searchJob = lifecycleScope.launch {
+        searchJob = lifecycleScope.launchWhenStarted {
             viewModel.getAnimesByQuery(queryText).collectLatest {
                 adapter.submitData(it)
-                binding.homeRecyclerView.scrollToTop()
             }
         }
     }
@@ -132,10 +130,9 @@ class HomeFragment : BaseFragment() {
     private fun filterAnimeList(filterName: String) {
         lifecycleScope.launch { adapter.resetList() }
         searchJob?.cancel()
-        searchJob = lifecycleScope.launch {
+        searchJob = lifecycleScope.launchWhenStarted {
             viewModel.getAnimesByFilter(filterName).collectLatest {
                 adapter.submitData(it)
-                binding.homeRecyclerView.scrollToTop()
             }
         }
     }
