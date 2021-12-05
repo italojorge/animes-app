@@ -6,4 +6,6 @@
     <string name="item_home_type_and_episodes_format">%1s (%2s eps)</string>
     <string name="item_home_date_period_format">%s - %s</string>
     <string name="item_home_members_format">%s members</string>
+    <string name="search_menu_title">Pesquisar</string>
+    <string name="home_menu_search_view_hint">Pesquisar Anime</string>
 </resources>

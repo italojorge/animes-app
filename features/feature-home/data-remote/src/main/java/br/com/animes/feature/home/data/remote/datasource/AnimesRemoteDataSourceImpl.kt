@@ -23,6 +23,12 @@ class AnimesRemoteDataSourceImpl(
     }
 
     override suspend fun requestAnimeListByQuery(query: String, page: Int): Result<List<Anime>> {
-        TODO("Not yet implemented")
+        return retrofitWrapper {
+            animesWebService.getAnimeListByQuery(query, page)
+        }.map { response ->
+            response.animeListResponse.map { animeResponse ->
+                animeResponse.toDomain()
+            }
+        }
     }
 }
