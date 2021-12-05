@@ -1,10 +1,15 @@
 package br.com.animes.core.extensions
 
-import android.content.*
+import android.content.ActivityNotFoundException
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -108,4 +113,17 @@ fun Fragment.openDetailInSettings() = Intent().run {
 
 fun Fragment.softInputAdjustNothing() {
     requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+}
+
+fun Fragment.hideKeyboard() {
+    val activity = requireActivity()
+    val view = activity.window.currentFocus
+    val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    view?.let {
+        imm?.let {
+            if (it.isAcceptingText) {
+                it.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
+    }
 }

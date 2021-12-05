@@ -1,9 +1,9 @@
 package br.com.animes.feature.home.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -27,12 +27,19 @@ class AnimeListAdapter(
         }
     }
 
+    suspend fun resetList() {
+        submitData(PagingData.empty())
+    }
+
     inner class AnimeListViewHolder(private val binding: ItemAnimeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Anime, onAnimeClick: OnAnimeClick) {
             itemView.context.let { context ->
                 with(binding) {
                     itemAnimeTitleTextView.text = item.title
-                    itemAnimeDatePeriodTextView.text = setupAnimeDatePeriodTextView(item, context)
+                    itemAnimeDatePeriodTextView.apply {
+                        text = item.getFormattedDate()
+                        isVisible = text.isNotBlank()
+                    }
                     itemAnimeTypeAndEpisodesTextView.text = if (item.episodes != null) context.getString(
                         R.string.item_home_type_and_episodes_format, item.type, item.episodes.toString()
                     ) else item.type
@@ -43,28 +50,6 @@ class AnimeListAdapter(
                 itemView.setOnClickListener {
                     onAnimeClick.invoke(item)
                 }
-            }
-        }
-
-        private fun ItemAnimeBinding.setupAnimeDatePeriodTextView(
-            item: Anime,
-            context: Context
-        ) = when {
-            item.startDate != null && item.endDate != null -> {
-                context.getString(
-                    R.string
-                        .item_home_date_period_format, item.startDate, item.endDate
-                )
-            }
-            item.startDate != null -> {
-                item.startDate
-            }
-            item.endDate != null -> {
-                item.endDate
-            }
-            else -> {
-                itemAnimeDatePeriodTextView.isVisible = false
-                ""
             }
         }
     }

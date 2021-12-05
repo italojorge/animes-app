@@ -14,7 +14,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import br.com.animes.core.bases.BaseFragment
-import br.com.animes.core.extensions.getSelectedChipText
+import br.com.animes.core.extensions.getCheckedChipText
+import br.com.animes.core.extensions.hasChipChecked
+import br.com.animes.core.extensions.hideKeyboard
 import br.com.animes.core.extensions.scrollToTop
 import br.com.animes.core.utils.viewbinding.viewBinding
 import br.com.animes.feature.home.adapter.AnimeListAdapter
@@ -38,6 +40,7 @@ class HomeFragment : BaseFragment() {
     private val viewModel: HomeViewModel by viewModel()
     private var searchJob: Job? = null
     private val adapter by lazy { AnimeListAdapter(::onAnimeClick) }
+    private lateinit var searchViewMenu: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +64,7 @@ class HomeFragment : BaseFragment() {
         setupRecyclerView()
         fillChipGroup()
         onChipClick()
-        filterAnimeList()
+        filterAnimeList(binding.homeChipGroup.getCheckedChipText())
     }
 
     private fun setupToolbar() {
@@ -71,11 +74,13 @@ class HomeFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_menu, menu)
         val searchMenu: MenuItem = menu.findItem(R.id.menu_search)
-        val searchView: SearchView = searchMenu.actionView as SearchView
-        searchView.queryHint = getString(R.string.home_menu_search_view_hint)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchViewMenu = searchMenu.actionView as SearchView
+        searchViewMenu.queryHint = getString(R.string.home_menu_search_view_hint)
+        searchViewMenu.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchByQueryAnimeList(query.orEmpty())
+                searchAnimeListByQuery(query.orEmpty())
+                binding.homeChipGroup.clearCheck()
+                hideKeyboard()
                 return true
             }
 
@@ -102,7 +107,10 @@ class HomeFragment : BaseFragment() {
 
     private fun onChipClick() {
         binding.homeChipGroup.setOnCheckedChangeListener { _, _ ->
-            filterAnimeList()
+            if (binding.homeChipGroup.hasChipChecked()) {
+                searchViewMenu.setQuery("", false)
+                filterAnimeList(binding.homeChipGroup.getCheckedChipText())
+            }
         }
     }
 
@@ -110,20 +118,24 @@ class HomeFragment : BaseFragment() {
         Toast.makeText(requireContext(), "Anime Clicado: ${anime.title}", Toast.LENGTH_SHORT).show()
     }
 
-    private fun searchByQueryAnimeList(queryText: String) {
+    private fun searchAnimeListByQuery(queryText: String) {
+        lifecycleScope.launch { adapter.resetList() }
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             viewModel.getAnimesByQuery(queryText).collectLatest {
                 adapter.submitData(it)
+                binding.homeRecyclerView.scrollToTop()
             }
         }
     }
 
-    private fun filterAnimeList() {
+    private fun filterAnimeList(filterName: String) {
+        lifecycleScope.launch { adapter.resetList() }
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
-            viewModel.getAnimesByFilter(binding.homeChipGroup.getSelectedChipText()).collectLatest {
+            viewModel.getAnimesByFilter(filterName).collectLatest {
                 adapter.submitData(it)
+                binding.homeRecyclerView.scrollToTop()
             }
         }
     }
