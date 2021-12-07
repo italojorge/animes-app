@@ -1,7 +1,7 @@
 package br.com.animes.feature.home.data.remote.datasource
 
+import br.com.animes.base.data.remote.utils.DataSourceException
 import br.com.animes.base.data.remote.utils.RetrofitWrapper.retrofitWrapper
-import br.com.animes.base.data.remote.utils.ServerHttpException
 import br.com.animes.domain.utils.Result
 import br.com.animes.feature.home.data.AnimesRemoteDataSource
 import br.com.animes.feature.home.data.remote.mapper.toDomain
@@ -25,7 +25,7 @@ class AnimesRemoteDataSourceImpl(
                 animeResponse.toDomain()
             }
         }.mapError { throwable ->
-            return@mapError if (throwable is ServerHttpException && throwable.errorCode == HttpURLConnection.HTTP_NOT_FOUND) {
+            return@mapError if (throwable is DataSourceException && throwable.errorCode == HttpURLConnection.HTTP_NOT_FOUND) {
                 EndListException
             } else {
                 throwable
@@ -39,6 +39,12 @@ class AnimesRemoteDataSourceImpl(
         }.map { response ->
             response.animeListResponse.map { animeResponse ->
                 animeResponse.toDomain()
+            }
+        }.mapError { throwable ->
+            return@mapError if (throwable is DataSourceException && throwable.errorCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                EndListException
+            } else {
+                throwable
             }
         }
     }

@@ -8,7 +8,9 @@ enum class ErrorMessageEnum(val value: String) {
     DEFAULT_ERROR_WITH_CODE(DEFAULT_ERROR.value + " Código de erro: ")
 }
 
-class DataSourceException(message: String = ErrorMessageEnum.DEFAULT_ERROR.value) :
+class DataSourceException(
+    val errorCode: Int,
+    message: String = ErrorMessageEnum.DEFAULT_ERROR.value) :
     Exception(message)
 
 class ServerHttpException(

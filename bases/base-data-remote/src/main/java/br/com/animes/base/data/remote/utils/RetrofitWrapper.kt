@@ -32,8 +32,9 @@ object RetrofitWrapper : KoinComponent {
         httpException: HttpException
     ): Throwable {
         return try {
-            val error = errorBody?.string()?.let { Gson().fromJsonOrNull<ErrorResponse>(it) }
+            val error = errorBody?.string()?.let { Gson().fromJson<ErrorResponse>(it) }
             DataSourceException(
+                errorCode = httpException.code(),
                 message = error?.message ?: ErrorMessageEnum.DEFAULT_ERROR.value
             )
         } catch (e: Exception) {
