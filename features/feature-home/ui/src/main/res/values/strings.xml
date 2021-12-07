@@ -8,7 +8,6 @@
     <string name="home_menu_search_view_hint">Search Anime</string>
     <string name="anime_details_toolbar_title">Anime Details</string>
     <string name="anime_details_score_label">Score: %s</string>
-
     <string name="item_anime_details_information_format" translatable="false">%1s: %2s</string>
     <string name="item_anime_details_type_label">Type</string>
     <string name="item_anime_details_episodes_label">Episodes</string>
@@ -18,4 +17,6 @@
     <string name="item_anime_details_rank_label">Rank</string>
     <string name="item_anime_details_source_label">Source</string>
     <string name="item_anime_details_duration_label">Duration</string>
+    <string name="retry">Retry</string>
+    <string name="empty_anime_list_message">No results found!</string>
 </resources>

@@ -44,7 +44,7 @@ object RetrofitWrapper : KoinComponent {
     private fun getGenericHttpError(
         httpException: HttpException
     ) = ServerHttpException(
-        errorCode = httpException.code().toString(),
+        errorCode = httpException.code(),
         httpException = httpException,
         message = ErrorMessageEnum.DEFAULT_ERROR_WITH_CODE.value + httpException.code(),
     )

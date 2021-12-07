@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import br.com.animes.feature.home.data.AnimesRemoteDataSource
 import br.com.animes.feature.home.domain.model.Anime
+import br.com.animes.feature.home.domain.model.EndListException
 import br.com.animes.feature.home.domain.model.FilterTopAnimesEnum
 
 class AnimesByFilterPagingSourceFactory(
@@ -13,20 +14,30 @@ class AnimesByFilterPagingSourceFactory(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Anime> {
         val position = params.key ?: ANIME_LIST_STARTING_PAGE_INDEX
         val result = remoteDataSource.requestAnimeListByFilter(filter, position)
-        return if (result.isSuccess) {
-            val animeList = result.getOrNull()
-            val nextKey = if (animeList.isNullOrEmpty()) {
-                null
-            } else {
-                position + PAGING_INCREMENT_VALUE
+        return when {
+            result.isSuccess -> {
+                val animeList = result.getOrNull()
+                val nextKey = if (animeList.isNullOrEmpty()) {
+                    null
+                } else {
+                    position + PAGING_INCREMENT_VALUE
+                }
+                LoadResult.Page(
+                    data = animeList.orEmpty(),
+                    prevKey = if (position == ANIME_LIST_STARTING_PAGE_INDEX) null else position - 1,
+                    nextKey = nextKey
+                )
             }
-            LoadResult.Page(
-                data = animeList.orEmpty(),
-                prevKey = if (position == ANIME_LIST_STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = nextKey
-            )
-        } else {
-            return LoadResult.Error(result.getExceptionOrNull() ?: Exception())
+            result.isFailure && result.getErrorOrNull() == EndListException -> {
+                LoadResult.Page(
+                    data = listOf(),
+                    prevKey = params.key ?: ANIME_LIST_STARTING_PAGE_INDEX - 1,
+                    nextKey = null
+                )
+            }
+            else -> {
+                LoadResult.Error(result.getErrorOrNull() ?: Exception())
+            }
         }
     }
 

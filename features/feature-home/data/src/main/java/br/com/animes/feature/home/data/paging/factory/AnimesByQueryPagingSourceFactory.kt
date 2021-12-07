@@ -25,7 +25,7 @@ class AnimesByQueryPagingSourceFactory(
                 nextKey = nextKey
             )
         } else {
-            return LoadResult.Error(result.getExceptionOrNull() ?: Exception())
+            return LoadResult.Error(result.getErrorOrNull() ?: Exception())
         }
     }
 

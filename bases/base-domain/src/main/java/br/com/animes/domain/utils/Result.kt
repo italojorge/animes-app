@@ -31,7 +31,7 @@ class Result<T> private constructor(
     }
 
     suspend fun mapError(
-        action: suspend (Throwable) -> Exception
+        action: suspend (Throwable) -> Throwable
     ): Result<T> {
         if (failure == null) return this
 
@@ -63,7 +63,7 @@ class Result<T> private constructor(
 
     fun getOrNull(): T? = success
 
-    fun getExceptionOrNull(): Throwable? = failure
+    fun getErrorOrNull(): Throwable? = failure
 
     companion object {
         fun <T> success(data: T) = Result(success = data, failure = null)

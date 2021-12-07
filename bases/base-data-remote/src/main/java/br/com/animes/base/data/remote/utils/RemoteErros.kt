@@ -12,7 +12,7 @@ class DataSourceException(message: String = ErrorMessageEnum.DEFAULT_ERROR.value
     Exception(message)
 
 class ServerHttpException(
-    val errorCode: String,
+    val errorCode: Int,
     val httpException: HttpException,
     message: String = ErrorMessageEnum.DEFAULT_ERROR.value
 ) : Exception(message)

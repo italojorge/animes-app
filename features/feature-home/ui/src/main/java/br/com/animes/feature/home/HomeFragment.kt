@@ -9,8 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import br.com.animes.core.bases.BaseFragment
 import br.com.animes.core.extensions.getCheckedChipText
@@ -20,6 +22,7 @@ import br.com.animes.core.extensions.scrollToTop
 import br.com.animes.core.extensions.setupToolbar
 import br.com.animes.core.utils.viewbinding.viewBinding
 import br.com.animes.feature.home.adapter.AnimeListAdapter
+import br.com.animes.feature.home.adapter.AnimeListLoadStateAdapter
 import br.com.animes.feature.home.databinding.FragmentHomeBinding
 import br.com.animes.feature.home.databinding.SingleChipLayoutBinding
 import br.com.animes.feature.home.domain.model.Anime
@@ -28,7 +31,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -58,6 +60,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar(binding.homeToolbar)
+        addObservers()
         setupRecyclerView()
         fillChipGroup()
         onChipClick()
@@ -84,18 +87,45 @@ class HomeFragment : BaseFragment() {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
-
-    private fun setupRecyclerView() {
-        binding.homeRecyclerView.adapter = adapter
-
+    private fun addObservers() {
         lifecycleScope.launchWhenStarted {
             adapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
-                .filter { it.refresh is LoadState.NotLoading }
-                .collect {
-                    binding.homeRecyclerView.scrollToTop()
+                .collect { loadState ->
+                    handleLoadState(loadState)
                 }
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.homeRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = AnimeListLoadStateAdapter { adapter.retry() },
+            footer = AnimeListLoadStateAdapter { adapter.retry() }
+        )
+    }
+
+    private fun handleLoadState(loadState: CombinedLoadStates) {
+        val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+        val errorState = loadState.source.refresh as? LoadState.Error
+        val isSuccess = !isListEmpty && errorState == null
+        val isLoading = loadState.source.refresh is LoadState.Loading
+
+        binding.homeEmptyListTextView.isVisible = isListEmpty
+        binding.homeProgressBar.isVisible = isLoading
+        binding.homeRetryButton.setOnClickListener { adapter.retry() }
+        handleErrorState(errorState)
+        handleSuccessState(isSuccess)
+    }
+
+    private fun handleErrorState(errorState: LoadState.Error?) {
+        binding.homeRetryButton.isVisible = errorState != null
+        binding.homeErrorTextView.isVisible = errorState != null
+        binding.homeErrorTextView.text = errorState?.error?.message
+    }
+
+    private fun handleSuccessState(isSuccess: Boolean) {
+        binding.homeRecyclerView.isVisible = isSuccess
+        if (isSuccess) binding.homeRecyclerView.scrollToTop()
     }
 
     private fun onChipClick() {
