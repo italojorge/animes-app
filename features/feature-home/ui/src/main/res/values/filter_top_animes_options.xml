@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="airing">airing</string>
+    <string name="upcoming">upcoming</string>
+    <string name="tv">tv</string>
+    <string name="movie">movie</string>
+    <string name="ova">ova</string>
+    <string name="special">special Anime</string>
+</resources>

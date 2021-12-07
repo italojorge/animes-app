@@ -7,4 +7,15 @@
     <string name="item_home_members_format">%s members</string>
     <string name="home_menu_search_view_hint">Search Anime</string>
     <string name="anime_details_toolbar_title">Anime Details</string>
+    <string name="anime_details_score_label">Score: %s</string>
+
+    <string name="item_anime_details_information_format" translatable="false">%1s: %2s</string>
+    <string name="item_anime_details_type_label">Type</string>
+    <string name="item_anime_details_episodes_label">Episodes</string>
+    <string name="item_anime_details_date_label">Date</string>
+    <string name="item_anime_details_members_label">Members</string>
+    <string name="item_anime_details_status_label">Status</string>
+    <string name="item_anime_details_rank_label">Rank</string>
+    <string name="item_anime_details_source_label">Source</string>
+    <string name="item_anime_details_duration_label">Duration</string>
 </resources>

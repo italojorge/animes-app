@@ -3,6 +3,7 @@ import dependencies.biometric
 import dependencies.implementation
 import dependencies.koinAndroid
 import dependencies.lifecycle
+import dependencies.navigation
 import dependencies.pagingAndroid
 
 plugins {
@@ -42,6 +43,7 @@ dependencies {
     implementation(project(ProjectModules.Feature.HOME.DOMAIN))
     koinAndroid()
     pagingAndroid()
+    navigation()
     androidx()
     lifecycle()
     biometric()

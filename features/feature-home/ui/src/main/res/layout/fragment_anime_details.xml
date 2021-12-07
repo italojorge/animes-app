@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:minHeight="?android:actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back_24dp"
             app:title="@string/anime_details_toolbar_title"
             app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -50,24 +51,37 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Fullmetal Alchemist: Brotherhood" />
 
-            <ImageView
-                android:id="@+id/anime_details_image_view"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/anime_details_score_text_view"
+                style="@style/TextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_score_star_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anime_details_title_text_view"
+                tools:text="Score: 8.63" />
+
+            <ImageView
+                android:id="@+id/anime_details_image_view"
+                android:layout_width="208dp"
+                android:layout_height="240dp"
                 android:layout_marginTop="16dp"
                 android:importantForAccessibility="no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anime_details_title_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/anime_details_score_text_view"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/anime_details_description_text_view"
+                android:id="@+id/anime_details_synopsis_text_view"
                 style="@style/TextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +99,7 @@
                 android:text="@string/information"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anime_details_description_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/anime_details_synopsis_text_view" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/anime_details_recycler_view"
@@ -96,10 +110,29 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/default_margin"
                 android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anime_details_information_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/anime_details_information_text_view"
+                tools:listitem="@layout/item_anime_details" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/anime_details_loading_frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anime_details_app_bar_layout"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

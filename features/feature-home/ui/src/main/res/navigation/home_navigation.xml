@@ -10,5 +10,17 @@
         tools:layout="@layout/fragment_home" >
         <deepLink
             app:uri="@string/access_home_deeplink" />
+        <action
+            android:id="@+id/action_home_fragment_to_animeDetailsFragment"
+            app:destination="@id/anime_details_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/anime_details_fragment"
+        android:name="br.com.animes.feature.home.details.AnimeDetailsFragment"
+        android:label="AnimeDetailsFragment"
+        tools:layout="@layout/fragment_anime_details">
+        <argument
+            android:name="id"
+            app:argType="long" />
     </fragment>
 </navigation>

@@ -54,6 +54,11 @@ class LoadingButton : ConstraintLayout {
         }
     }
 
+    override fun performClick(): Boolean {
+        binding.widgetLoadingButton.performClick()
+        return super.performClick()
+    }
+
     override fun setOnClickListener(l: OnClickListener?) {
         binding.widgetLoadingButton.setOnClickListener(l)
     }

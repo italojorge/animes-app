@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import br.com.animes.base_feature.R
-import br.com.animes.domain.AnalyticsEvent
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 object AlertDialogExtension : KoinComponent {
 //    private val analyticsEvent: AnalyticsEvent by inject()
@@ -37,14 +35,14 @@ object AlertDialogExtension : KoinComponent {
         )
     }
 
-    fun Context.showErrorAlert(error: Throwable) {
+    fun Context.showErrorAlert(error: Throwable, positiveButtonClickListener: (() -> Unit)? = null) {
         error.message?.let {
-            showAlert(title = "Ops!", message = it)
+            showAlert(title = "Ops!", message = it, positiveButtonClickListener = positiveButtonClickListener)
         }
     }
 
-    fun Fragment.showErrorAlert(error: Throwable) {
-        requireContext().showErrorAlert(error)
+    fun Fragment.showErrorAlert(error: Throwable, positiveButtonClickListener: (() -> Unit)? = null) {
+        requireContext().showErrorAlert(error, positiveButtonClickListener = positiveButtonClickListener)
     }
 
     private fun Context.setupShowAlertDialog(

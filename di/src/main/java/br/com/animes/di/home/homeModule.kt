@@ -6,6 +6,7 @@ import br.com.animes.feature.home.data.AnimesRemoteDataSource
 import br.com.animes.feature.home.data.AnimesRepositoryImpl
 import br.com.animes.feature.home.data.remote.datasource.AnimesRemoteDataSourceImpl
 import br.com.animes.feature.home.data.remote.service.AnimesWebService
+import br.com.animes.feature.home.details.AnimeDetailsViewModel
 import br.com.animes.feature.home.domain.repository.AnimesRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -30,5 +31,10 @@ val homeModule = module {
     //VIEW_MODEL
     viewModel {
         HomeViewModel(get())
+    }
+
+    //VIEW_MODEL
+    viewModel {
+        AnimeDetailsViewModel(get())
     }
 }

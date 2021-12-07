@@ -3,10 +3,13 @@ package br.com.animes.feature.home.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import br.com.animes.domain.utils.Result
 import br.com.animes.feature.home.data.paging.factory.AnimesByFilterPagingSourceFactory
 import br.com.animes.feature.home.data.paging.factory.AnimesByQueryPagingSourceFactory
 import br.com.animes.feature.home.domain.ANIMES_PAGE_SIZE
 import br.com.animes.feature.home.domain.model.Anime
+import br.com.animes.feature.home.domain.model.AnimeDetails
+import br.com.animes.feature.home.domain.model.FilterTopAnimesEnum
 import br.com.animes.feature.home.domain.repository.AnimesRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -23,13 +26,17 @@ class AnimesRepositoryImpl(
         ).flow
     }
 
-    override fun getAnimesByFilter(filterName: String): Flow<PagingData<Anime>> {
+    override fun getAnimesByFilter(filter: FilterTopAnimesEnum): Flow<PagingData<Anime>> {
         return Pager(
             config = PagingConfig(
                 pageSize = ANIMES_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { AnimesByFilterPagingSourceFactory(remoteDataSource, filterName) }
+            pagingSourceFactory = { AnimesByFilterPagingSourceFactory(remoteDataSource, filter) }
         ).flow
+    }
+
+    override suspend fun getAnimeDetails(id: Long): Result<AnimeDetails> {
+        return remoteDataSource.getAnimeDetails(id)
     }
 }

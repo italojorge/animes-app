@@ -8,29 +8,27 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import br.com.animes.core.bases.BaseFragment
 import br.com.animes.core.extensions.getCheckedChipText
 import br.com.animes.core.extensions.hasChipChecked
 import br.com.animes.core.extensions.hideKeyboard
 import br.com.animes.core.extensions.scrollToTop
+import br.com.animes.core.extensions.setupToolbar
 import br.com.animes.core.utils.viewbinding.viewBinding
 import br.com.animes.feature.home.adapter.AnimeListAdapter
 import br.com.animes.feature.home.databinding.FragmentHomeBinding
 import br.com.animes.feature.home.databinding.SingleChipLayoutBinding
 import br.com.animes.feature.home.domain.model.Anime
-import br.com.animes.feature.home.domain.model.FilterTopAnimesEnum
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
@@ -59,15 +57,11 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupToolbar()
+        setupToolbar(binding.homeToolbar)
         setupRecyclerView()
         fillChipGroup()
         onChipClick()
-        filterAnimeList(binding.homeChipGroup.getCheckedChipText())
-    }
-
-    private fun setupToolbar() {
-        (activity as? AppCompatActivity)?.setSupportActionBar(binding.homeToolbar)
+        filterAnimeList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -94,7 +88,7 @@ class HomeFragment : BaseFragment() {
     private fun setupRecyclerView() {
         binding.homeRecyclerView.adapter = adapter
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             adapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.NotLoading }
@@ -108,17 +102,19 @@ class HomeFragment : BaseFragment() {
         binding.homeChipGroup.setOnCheckedChangeListener { _, _ ->
             if (binding.homeChipGroup.hasChipChecked()) {
                 searchViewMenu.setQuery("", false)
-                filterAnimeList(binding.homeChipGroup.getCheckedChipText())
+                filterAnimeList()
             }
         }
     }
 
     private fun onAnimeClick(anime: Anime) {
-        Toast.makeText(requireContext(), "Anime Clicado: ${anime.title}", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime.id)
+        )
     }
 
     private fun searchAnimeListByQuery(queryText: String) {
-        lifecycleScope.launch { adapter.resetList() }
+        lifecycleScope.launchWhenStarted { adapter.resetList() }
         searchJob?.cancel()
         searchJob = lifecycleScope.launchWhenStarted {
             viewModel.getAnimesByQuery(queryText).collectLatest {
@@ -127,23 +123,27 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun filterAnimeList(filterName: String) {
-        lifecycleScope.launch { adapter.resetList() }
+    private fun filterAnimeList() {
+        val filter = FilterTopAnimesBindingEnum.valueOfByStringRes(
+            requireContext(), binding.homeChipGroup.getCheckedChipText()
+        )
+
+        lifecycleScope.launchWhenStarted { adapter.resetList() }
         searchJob?.cancel()
         searchJob = lifecycleScope.launchWhenStarted {
-            viewModel.getAnimesByFilter(filterName).collectLatest {
+            viewModel.getAnimesByFilter(filter).collectLatest {
                 adapter.submitData(it)
             }
         }
     }
 
     private fun fillChipGroup() {
-        FilterTopAnimesEnum.values().forEachIndexed { index, enum ->
+        FilterTopAnimesBindingEnum.values().forEachIndexed { index, enum ->
             val chip: Chip = SingleChipLayoutBinding.inflate(
                 LayoutInflater.from(context),
                 binding.homeChipGroup, false
             ).root
-            chip.text = enum.name.lowercase()
+            chip.text = getString(enum.stringRes)
             if (index == FIRST_CHIP_INDEX) chip.isChecked = true
             binding.homeChipGroup.addView(chip)
         }

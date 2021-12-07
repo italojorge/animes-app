@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="airing">em exibição</string>
+    <string name="upcoming">em breve</string>
+    <string name="tv">tv</string>
+    <string name="movie">filme</string>
+    <string name="ova">ova</string>
+    <string name="special">especial</string>
+</resources>

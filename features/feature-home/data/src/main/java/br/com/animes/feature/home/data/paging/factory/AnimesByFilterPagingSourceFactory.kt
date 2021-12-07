@@ -8,11 +8,11 @@ import br.com.animes.feature.home.domain.model.FilterTopAnimesEnum
 
 class AnimesByFilterPagingSourceFactory(
     private val remoteDataSource: AnimesRemoteDataSource,
-    private val filterName: String
+    private val filter: FilterTopAnimesEnum
 ) : PagingSource<Int, Anime>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Anime> {
         val position = params.key ?: ANIME_LIST_STARTING_PAGE_INDEX
-        val result = remoteDataSource.requestAnimeListByFilter(filterName, position)
+        val result = remoteDataSource.requestAnimeListByFilter(filter, position)
         return if (result.isSuccess) {
             val animeList = result.getOrNull()
             val nextKey = if (animeList.isNullOrEmpty()) {
