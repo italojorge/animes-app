@@ -1,16 +1,9 @@
-import dependencies.androidTestDependencies
 import dependencies.androidx
-import dependencies.biometric
-import dependencies.implementation
-import dependencies.koinAndroid
-import dependencies.lifecycle
-import dependencies.navigation
-import dependencies.testDependencies
+import dependencies.testUtilsDependencies
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -39,15 +32,6 @@ android {
 }
 
 dependencies {
-    api(project(ProjectModules.Base.CORE))
-    implementation(project(ProjectModules.Feature.AUTH.DOMAIN))
-    implementation(project(ProjectModules.Base.DOMAIN))
-    testImplementation(project(ProjectModules.Base.TEST_UTILS))
-    androidTestDependencies()
-    testDependencies()
-    koinAndroid()
     androidx()
-    lifecycle()
-    biometric()
-    navigation()
+    testUtilsDependencies()
 }

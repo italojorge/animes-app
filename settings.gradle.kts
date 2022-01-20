@@ -6,6 +6,7 @@ include(
     ":bases:base-domain",
     ":bases:base-data-remote",
     ":bases:core",
+    ":bases:test-utils",
     ":features:feature-auth:ui",
     ":features:feature-auth:domain",
     ":features:feature-auth:data",

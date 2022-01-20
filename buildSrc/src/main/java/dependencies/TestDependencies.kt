@@ -84,6 +84,12 @@ fun DependencyHandler.navigationTest() {
     androidTestImplementation(TestDependencies.Libs.ANDROIDX_NAVIGATION_TESTING)
 }
 
+fun DependencyHandler.testUtilsDependencies() {
+    implementation(TestDependencies.Libs.JUNIT5_API)
+    implementation(TestDependencies.Libs.JUNIT5_ENGINE)
+    implementation(TestDependencies.Libs.JUNIT5_PARAMS)
+}
+
 fun DependencyHandler.junit5() {
     testImplementation(TestDependencies.Libs.JUNIT5_API)
     testRuntimeOnly(TestDependencies.Libs.JUNIT5_ENGINE)

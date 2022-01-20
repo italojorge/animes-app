@@ -1,5 +1,6 @@
 package br.com.animes.feature.auth.data.remote.datasource
 
+import br.com.animes.domain.utils.randomString
 import br.com.animes.feature.auth.data.remote.model.LoginResponse
 import br.com.animes.feature.auth.data.remote.service.LoginWebService
 import io.mockk.clearAllMocks
@@ -18,13 +19,10 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import retrofit2.HttpException
 import retrofit2.Response
-import java.util.*
 
 @ExperimentalCoroutinesApi
 @Suppress("ClassName")
 class AuthRemoteDataSourceImplTest {
-    val randomString: String
-        get() = UUID.randomUUID().toString()
     private val service: LoginWebService = mockk()
     private val subject = AuthRemoteDataSourceImpl(loginWebService = service)
 

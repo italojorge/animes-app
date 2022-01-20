@@ -1,11 +1,13 @@
-package br.com.animes.feature.auth
+package br.com.animes.test.utils
 
+import android.annotation.SuppressLint
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.arch.core.executor.TaskExecutor
 import org.junit.jupiter.api.extension.AfterAllCallback
 import org.junit.jupiter.api.extension.BeforeAllCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 
+@SuppressLint("RestrictedApi")
 class InstantExecutorExtension : BeforeAllCallback, AfterAllCallback {
 
     override fun beforeAll(context: ExtensionContext?) {

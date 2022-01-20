@@ -3,6 +3,7 @@ import dependencies.implementation
 import dependencies.koinAndroid
 import dependencies.lottieAnimations
 import dependencies.navigation
+import dependencies.testDependencies
 
 plugins {
     id("com.android.application")
@@ -62,6 +63,7 @@ android {
 }
 
 dependencies {
+    testDependencies()
     androidx()
     koinAndroid()
     navigation()

@@ -30,5 +30,6 @@ object ProjectModules {
         const val CORE = "${BasePrefix}core"
         const val DOMAIN = "${BasePrefix}base-domain"
         const val DATA_REMOTE = "${BasePrefix}base-data-remote"
+        const val TEST_UTILS = "${BasePrefix}test-utils"
     }
 }

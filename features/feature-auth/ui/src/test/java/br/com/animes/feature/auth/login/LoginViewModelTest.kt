@@ -2,11 +2,12 @@ package br.com.animes.feature.auth.login
 
 import androidx.lifecycle.Observer
 import br.com.animes.domain.utils.Result
-import br.com.animes.feature.auth.InstantExecutorExtension
+import br.com.animes.domain.utils.randomString
 import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.DoLogin
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPassword
 import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmail
+import br.com.animes.test.utils.InstantExecutorExtension
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -19,7 +20,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import java.util.*
 
 @ExperimentalCoroutinesApi
 @Suppress("ClassName")
@@ -31,8 +31,6 @@ class LoginViewModelTest {
     private val authRepository: AuthRepository = mockk()
     private val observerLoading: Observer<Boolean> = mockk(relaxed = true)
     private lateinit var subject: LoginViewModel
-    val randomString: String
-        get() = UUID.randomUUID().toString()
 
     @BeforeEach
     fun setup() {
