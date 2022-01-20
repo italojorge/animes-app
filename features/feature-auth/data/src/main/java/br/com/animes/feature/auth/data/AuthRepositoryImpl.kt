@@ -1,8 +1,8 @@
 package br.com.animes.feature.auth.data
 
 import br.com.animes.domain.utils.Result
-import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.model.UserCredentials
+import br.com.animes.feature.auth.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val remoteDataSource: AuthRemoteDataSource,
@@ -30,7 +30,7 @@ class AuthRepositoryImpl(
         return localDataSource.hasCredentials()
     }
 
-    override suspend fun getUserEmail(): String? {
+    override suspend fun getUserEmail(): Result<String?> {
         return localDataSource.getUserEmail()
     }
 

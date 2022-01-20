@@ -9,5 +9,5 @@ interface AuthLocalDataSource {
     fun getCredentials(): Result<UserCredentials?>
     fun hasCredentials(): Result<Boolean>
     fun saveUserEmail(username: String)
-    fun getUserEmail(): String?
+    fun getUserEmail(): Result<String?>
 }

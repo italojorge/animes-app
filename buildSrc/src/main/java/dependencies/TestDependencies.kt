@@ -7,8 +7,9 @@ object TestDependencies {
         const val ESPRESSO_VERSION = "3.4.0"
         const val MOCKK_VERSION = "1.11.0"
 
-        const val JUNIT_5_VERSION = "5.8.0"
-        const val JUNIT_5_ANDROID_VERSION = "1.9.2"
+        const val JUNIT_5_VERSION = "5.8.2"
+        const val JUNIT_5_ANDROID_VERSION = "1.3.0"
+        const val COROUTINES_VERSION = "1.5.2"
     }
 
     object Libs {
@@ -21,6 +22,7 @@ object TestDependencies {
             "de.mannodermaus.junit5:android-test-core:${Versioning.JUNIT_5_ANDROID_VERSION}"
         const val JUNIT5_ANDROID_RUNNER =
             "de.mannodermaus.junit5:android-test-runner:${Versioning.JUNIT_5_ANDROID_VERSION}"
+        const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versioning.COROUTINES_VERSION}"
 
         const val KOIN_TEST = "org.koin:koin-test:${DIDependencies.Versioning.KOIN_VERSION}"
         const val ESPRESSO_CORE =
@@ -47,12 +49,35 @@ fun DependencyHandler.espresso() {
 
 fun DependencyHandler.mockk() {
     testImplementation(TestDependencies.Libs.MOCKK)
+}
+
+fun DependencyHandler.mockkAndroid() {
     androidTestImplementation(TestDependencies.Libs.MOCKK_ANDROID)
 }
 
 fun DependencyHandler.koinTest() {
     testImplementation(TestDependencies.Libs.KOIN_TEST)
     androidTestImplementation(TestDependencies.Libs.KOIN_TEST)
+}
+
+fun DependencyHandler.testDependencies() {
+    coroutinesTest()
+    junit5()
+    mockk()
+}
+
+fun DependencyHandler.androidTestDependencies() {
+    coroutinesAndroidTest()
+    junit5Android()
+    mockkAndroid()
+}
+
+fun DependencyHandler.coroutinesTest() {
+    testImplementation(TestDependencies.Libs.COROUTINES_TEST)
+}
+
+fun DependencyHandler.coroutinesAndroidTest() {
+    androidTestImplementation(TestDependencies.Libs.COROUTINES_TEST)
 }
 
 fun DependencyHandler.navigationTest() {
@@ -62,8 +87,11 @@ fun DependencyHandler.navigationTest() {
 fun DependencyHandler.junit5() {
     testImplementation(TestDependencies.Libs.JUNIT5_API)
     testRuntimeOnly(TestDependencies.Libs.JUNIT5_ENGINE)
+    testImplementation(TestDependencies.Libs.JUNIT5_ENGINE)
     testImplementation(TestDependencies.Libs.JUNIT5_PARAMS)
+}
 
+fun DependencyHandler.junit5Android() {
     androidTestImplementation(TestDependencies.Libs.JUNIT5_API)
     androidTestImplementation(TestDependencies.Libs.JUNIT5_ANDROID_CORE)
     androidTestRuntimeOnly(TestDependencies.Libs.JUNIT5_ANDROID_RUNNER)

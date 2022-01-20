@@ -39,8 +39,8 @@ class UserAuthLocalImpl(context: Context) : UserSessionManager, AuthLocalDataSou
         }
     }
 
-    override fun getUserEmail(): String? {
-        return preferences.getString(USER_EMAIL_KEY, "")
+    override fun getUserEmail(): Result<String?> {
+        return Result.success(preferences.getString(USER_EMAIL_KEY, ""))
     }
 
     override fun getSession(): String? {

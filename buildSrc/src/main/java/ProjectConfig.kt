@@ -5,7 +5,7 @@ object ProjectConfig {
         object Versioning {
             const val ANDROID_GRADLE_PLUGIN_VERSION = "7.0.3"
             const val NAVIGATION_VERSION = "2.3.5"
-            const val JUNIT_5_PLUGIN_VERSION = "1.8.0.0"
+            const val JUNIT_5_PLUGIN_VERSION = "1.8.2.0"
         }
 
         const val ANDROID_PLUGIN =

@@ -37,7 +37,6 @@ val authModule = module {
 
     factory { ValidateAppPassword() }
 
-
     factory { DoLogin(get(), get(), get()) }
 
     //VIEW_MODEL

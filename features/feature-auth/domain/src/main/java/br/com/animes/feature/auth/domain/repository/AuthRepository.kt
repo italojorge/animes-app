@@ -8,5 +8,5 @@ interface AuthRepository {
     suspend fun doLogin(): Result<Unit>
     suspend fun saveCredentials(userCredentials: UserCredentials): Result<Unit>
     suspend fun hasCredentials(): Result<Boolean>
-    suspend fun getUserEmail(): String?
+    suspend fun getUserEmail(): Result<String?>
 }
