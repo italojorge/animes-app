@@ -5,7 +5,7 @@ import br.com.animes.domain.exception.EmptyFieldException
 import br.com.animes.domain.utils.Result
 import br.com.animes.domain.utils.isNotEmail
 
-class ValidateUserEmail : UseCase<ValidateUserEmail.Params, Unit>() {
+class ValidateUserEmailUseCase : UseCase<ValidateUserEmailUseCase.Params, Unit>() {
     override suspend fun execute(param: Params): Result<Unit> {
         return when {
             param.email.isBlank() -> Result.failure(EmptyFieldException())

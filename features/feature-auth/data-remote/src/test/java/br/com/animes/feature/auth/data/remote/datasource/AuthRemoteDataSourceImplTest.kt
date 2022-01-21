@@ -13,7 +13,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.Credentials
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -57,7 +57,7 @@ class AuthRemoteDataSourceImplTest {
         }
 
         @Test
-        fun `WHEN has a error on service THEN returns that error`() = runBlockingTest {
+        fun `WHEN has a error on service THEN returns error`() = runBlockingTest {
             val exceptionExpected = HttpException(
                 Response.error<HttpException>(400, mockk(relaxed = true))
             )
@@ -65,11 +65,11 @@ class AuthRemoteDataSourceImplTest {
             coEvery { service.doLogin(any()) } throws exceptionExpected
 
             val result = subject.doLogin(randomString, randomString)
-            assertNotNull(result.getErrorOrNull())
+            assertTrue(result.isFailure)
         }
 
         @Test
-        fun `WHEN has a success on service THEN return bearer token in response`() = runBlockingTest {
+        fun `WHEN has a success on service THEN return bearer token in login response`() = runBlockingTest {
             val bearerToken = randomString
             val loginResponse = LoginResponse(bearerToken)
 

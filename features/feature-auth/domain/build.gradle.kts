@@ -9,3 +9,9 @@ dependencies {
     testDependencies()
     implementation(project(ProjectModules.Base.DOMAIN))
 }
+
+tasks {
+    withType<Test> {
+        useJUnitPlatform()
+    }
+}

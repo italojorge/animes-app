@@ -10,3 +10,9 @@ dependencies {
     implementation(project(ProjectModules.Feature.AUTH.DOMAIN))
     implementation(project(ProjectModules.Base.DOMAIN))
 }
+
+tasks {
+    withType<Test> {
+        useJUnitPlatform()
+    }
+}

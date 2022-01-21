@@ -5,7 +5,7 @@ import br.com.animes.domain.exception.EmptyFieldException
 import br.com.animes.domain.utils.Result
 import br.com.animes.domain.utils.isRepeating
 
-class ValidateAppPassword : UseCase<ValidateAppPassword.Params, Unit>() {
+class ValidateAppPasswordUseCase : UseCase<ValidateAppPasswordUseCase.Params, Unit>() {
     override suspend fun execute(param: Params): Result<Unit> {
         return when {
             param.password.isBlank() -> Result.failure(EmptyFieldException())

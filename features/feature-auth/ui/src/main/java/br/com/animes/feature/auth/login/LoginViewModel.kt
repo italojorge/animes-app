@@ -9,20 +9,20 @@ import br.com.animes.core.utils.livedata.ViewState
 import br.com.animes.core.utils.livedata.postFailure
 import br.com.animes.core.utils.livedata.postLoading
 import br.com.animes.core.utils.livedata.postSuccess
+import br.com.animes.domain.core.UseCase
 import br.com.animes.domain.utils.Result
 import br.com.animes.feature.auth.domain.model.UserCredentials
 import br.com.animes.feature.auth.domain.repository.AuthRepository
-import br.com.animes.feature.auth.domain.use.cases.DoLogin
-import br.com.animes.feature.auth.domain.use.cases.ValidateAppPassword
-import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmail
+import br.com.animes.feature.auth.domain.use.cases.ValidateAppPasswordUseCase
+import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmailUseCase
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val validateUserEmailUseCase: ValidateUserEmail,
-    private val validateAppPasswordUseCase: ValidateAppPassword,
-    private val doLoginUseCase: DoLogin,
+    private val validateUserEmailUseCase: UseCase<ValidateUserEmailUseCase.Params, Unit>,
+    private val validateAppPasswordUseCase: UseCase<ValidateAppPasswordUseCase.Params, Unit>,
+    private val doLoginUseCase: UseCase<UserCredentials, Unit>,
     private val authRepository: AuthRepository,
     private val dispatcher: CoroutineContext = Dispatchers.Main
 ) : ViewModel() {
@@ -90,7 +90,7 @@ class LoginViewModel(
 
     private suspend fun validatePassword(password: String): Result<Unit> {
         return validateAppPasswordUseCase.execute(
-            ValidateAppPassword.Params(
+            ValidateAppPasswordUseCase.Params(
                 password
             )
         ).onFailure {
@@ -100,7 +100,7 @@ class LoginViewModel(
 
     private suspend fun validateUser(user: String): Result<Unit> {
         return validateUserEmailUseCase.execute(
-            ValidateUserEmail.Params(user)
+            ValidateUserEmailUseCase.Params(user)
         ).onFailure {
             _userEmailError.postValue(it)
         }
