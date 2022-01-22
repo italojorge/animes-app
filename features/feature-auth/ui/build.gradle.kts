@@ -36,6 +36,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LICENSE*")
+        resources.excludes.add("META-INF/LGPL2.1")
+    }
 }
 
 dependencies {
@@ -43,6 +49,7 @@ dependencies {
     implementation(project(ProjectModules.Feature.AUTH.DOMAIN))
     implementation(project(ProjectModules.Base.DOMAIN))
     testImplementation(project(ProjectModules.Base.TEST_UTILS))
+    androidTestImplementation(project(ProjectModules.Base.TEST_UTILS))
     androidTestDependencies()
     testDependencies()
     koinAndroid()

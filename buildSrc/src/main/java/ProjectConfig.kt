@@ -21,7 +21,7 @@ object ProjectConfig {
 
     object Android {
         const val APPLICATION_ID = "br.com.animes"
-        const val TEST_INSTRUMENTATION_RUNNER = "br.com.p20.espresso.runner.EspressoRunner"
+        const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 
         const val COMPILE_SDK_VERSION = 31
         const val MIN_SDK_VERSION = 21

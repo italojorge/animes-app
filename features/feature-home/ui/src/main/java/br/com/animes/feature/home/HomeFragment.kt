@@ -10,11 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
-import br.com.animes.core.bases.BaseFragment
 import br.com.animes.core.extensions.getCheckedChipText
 import br.com.animes.core.extensions.hasChipChecked
 import br.com.animes.core.extensions.hideKeyboard
@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding by viewBinding()
 
     private val viewModel: HomeViewModel by viewModel()

@@ -66,7 +66,7 @@ class LoadingButton : ConstraintLayout {
     private fun startLoading() {
         binding.apply {
             widgetLoadingButtonProgressBar.isVisible = true
-            widgetLoadingButton.isClickable = false
+            isClickable = false
             widgetLoadingButton.text = ""
         }
     }
@@ -74,7 +74,7 @@ class LoadingButton : ConstraintLayout {
     private fun stopLoading() {
         binding.apply {
             widgetLoadingButtonProgressBar.isVisible = false
-            widgetLoadingButton.isClickable = true
+            isClickable = true
             widgetLoadingButton.text = text
         }
     }

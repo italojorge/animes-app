@@ -10,6 +10,9 @@ object TestDependencies {
         const val JUNIT_5_VERSION = "5.8.2"
         const val JUNIT_5_ANDROID_VERSION = "1.3.0"
         const val COROUTINES_VERSION = "1.5.2"
+        const val ANDROID_TEST_VERSION = "1.2.0"
+        const val ANDROIDX_FRAGMENT_VERSION = "1.3.4"
+        const val ANDROIDX_ARCH_CORE_TESTING_VERSION = "2.1.0"
     }
 
     object Libs {
@@ -24,7 +27,8 @@ object TestDependencies {
             "de.mannodermaus.junit5:android-test-runner:${Versioning.JUNIT_5_ANDROID_VERSION}"
         const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versioning.COROUTINES_VERSION}"
 
-        const val KOIN_TEST = "org.koin:koin-test:${DIDependencies.Versioning.KOIN_VERSION}"
+        const val KOIN_TEST = "io.insert-koin:koin-test:${DIDependencies.Versioning.KOIN_VERSION}"
+        const val KOIN_TEST_JUNIT_5 = "io.insert-koin:koin-test-junit5:${DIDependencies.Versioning.KOIN_VERSION}"
         const val ESPRESSO_CORE =
             "androidx.test.espresso:espresso-core:${Versioning.ESPRESSO_VERSION}"
         const val ESPRESSO_CONTRIB =
@@ -37,6 +41,11 @@ object TestDependencies {
         const val MOCKK_ANDROID = "io.mockk:mockk-android:${Versioning.MOCKK_VERSION}"
         const val ANDROIDX_NAVIGATION_TESTING =
             "androidx.navigation:navigation-testing:${AndroidDependencies.Versioning.NAVIGATION_VERSION}"
+        const val ANDROIDX_TEST_CORE = "androidx.test:core-ktx:${Versioning.ANDROID_TEST_VERSION}"
+        const val ANDROIDX_TEST_RULES = "androidx.test:rules:${Versioning.ANDROID_TEST_VERSION}"
+        const val ANDROIDX_ARCH_CORE_TESTING = "androidx.arch.core:core-testing:${Versioning.ANDROIDX_ARCH_CORE_TESTING_VERSION}"
+        const val ANDROIDX_FRAGMENT_TESTING = "androidx.fragment:fragment-testing:${Versioning.ANDROIDX_FRAGMENT_VERSION}"
+
     }
 }
 
@@ -57,7 +66,9 @@ fun DependencyHandler.mockkAndroid() {
 
 fun DependencyHandler.koinTest() {
     testImplementation(TestDependencies.Libs.KOIN_TEST)
+    testImplementation(TestDependencies.Libs.KOIN_TEST_JUNIT_5)
     androidTestImplementation(TestDependencies.Libs.KOIN_TEST)
+    androidTestImplementation(TestDependencies.Libs.KOIN_TEST_JUNIT_5)
 }
 
 fun DependencyHandler.testDependencies() {
@@ -70,6 +81,17 @@ fun DependencyHandler.androidTestDependencies() {
     coroutinesAndroidTest()
     junit5Android()
     mockkAndroid()
+    navigationTest()
+    koinTest()
+    espresso()
+    androidXTest()
+}
+
+fun DependencyHandler.androidXTest() {
+    androidTestImplementation(TestDependencies.Libs.ANDROIDX_TEST_CORE)
+    androidTestImplementation(TestDependencies.Libs.ANDROIDX_TEST_RULES)
+    androidTestImplementation(TestDependencies.Libs.ANDROIDX_ARCH_CORE_TESTING)
+    androidTestImplementation(TestDependencies.Libs.ANDROIDX_FRAGMENT_TESTING)
 }
 
 fun DependencyHandler.coroutinesTest() {

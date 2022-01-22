@@ -18,7 +18,6 @@ import io.mockk.coVerifySequence
 import io.mockk.justRun
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -44,7 +43,7 @@ class LoginViewModelTest {
         subject = LoginViewModel(
             validateUserEmailUseCase,
             validateAppPasswordUseCase,
-            doLoginUseCase, authRepository, TestCoroutineDispatcher()
+            doLoginUseCase, authRepository
         )
         subject.loginViewState.observeForever(viewStateObserverMock)
     }

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavOptions
 import br.com.animes.feature.auth.navigation.AuthNavigation
-import br.com.animes.intent.R
+import br.com.animes.navigation.R
 import br.com.animes.navigation.utils.navigate
 
 class AuthNavigationImpl(private val fragment: Fragment) : AuthNavigation {
