@@ -9,15 +9,19 @@ import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.DoLoginUseCase
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPasswordUseCase
 import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmailUseCase
+import br.com.animes.feature.auth.model.LoginErrorMessageEnum
 import br.com.animes.test.utils.InstantExecutorExtension
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify
 import io.mockk.coVerifySequence
+import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
+import io.mockk.mockkObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -43,9 +47,10 @@ class LoginViewModelTest {
         subject = LoginViewModel(
             validateUserEmailUseCase,
             validateAppPasswordUseCase,
-            doLoginUseCase, authRepository
+            doLoginUseCase, authRepository, TestCoroutineDispatcher()
         )
         subject.loginViewState.observeForever(viewStateObserverMock)
+        mockkObject(LoginErrorMessageEnum)
     }
 
     @AfterEach
@@ -56,7 +61,7 @@ class LoginViewModelTest {
     @Nested
     inner class `GIVEN a call on doLogin without params` {
         @Test
-        fun `WHEN auth repository returns success login THEN post success on liveData`() = runBlockingTest {
+        fun `WHEN auth repository returns success login THEN post success on liveData`() {
             coEvery { authRepository.doLogin() } returns Result.success(Unit)
             subject.doLogin()
             coVerifySequence {
@@ -66,7 +71,7 @@ class LoginViewModelTest {
         }
 
         @Test
-        fun `WHEN auth repository returns a failure THEN post failure on liveData`() = runBlockingTest {
+        fun `WHEN auth repository returns a failure THEN post failure on liveData`() {
             val exception = Exception()
 
             coEvery { authRepository.doLogin() } returns Result.failure(exception)
@@ -81,26 +86,31 @@ class LoginViewModelTest {
     @Nested
     inner class `GIVEN a call on doLogin` {
         @Test
-        fun `WHEN user is invalid THEN post throwable in user email error live data AND do not login`() = runBlockingTest {
+        fun `WHEN user is invalid THEN map to login error message enum AND do not login`() {
             val userEmailException = Exception()
             val passwordException = Exception()
             coEvery { validateUserEmailUseCase.execute(any()) } returns Result.failure(userEmailException)
             coEvery { validateAppPasswordUseCase.execute(any()) } returns Result.failure(passwordException)
+            every { LoginErrorMessageEnum.valueOfOrDefault(any()) } returns LoginErrorMessageEnum.EMPTY_FIELD
+
             subject.doLogin("", randomString, randomBoolean)
-            assertEquals(userEmailException, subject.userEmailError.value)
+
+            assertEquals(LoginErrorMessageEnum.EMPTY_FIELD, subject.userEmailError.value)
             coVerify(exactly = 0) {
                 doLoginUseCase.execute(any())
             }
         }
 
         @Test
-        fun `WHEN password is invalid THEN post throwable in password error live data AND do not login`() = runBlockingTest {
+        fun `WHEN password is invalid THEN map to login error message enum AND do not login`() {
             val userEmailException = Exception()
             val passwordException = Exception()
             coEvery { validateUserEmailUseCase.execute(any()) } returns Result.failure(userEmailException)
             coEvery { validateAppPasswordUseCase.execute(any()) } returns Result.failure(passwordException)
+            every { LoginErrorMessageEnum.valueOfOrDefault(any()) } returns LoginErrorMessageEnum.EMPTY_FIELD
+
             subject.doLogin(randomString, "", randomBoolean)
-            assertEquals(passwordException, subject.passwordError.value)
+            assertEquals(LoginErrorMessageEnum.EMPTY_FIELD, subject.passwordError.value)
             coVerify(exactly = 0) {
                 doLoginUseCase.execute(any())
             }
@@ -109,7 +119,7 @@ class LoginViewModelTest {
         @Nested
         inner class `AND user and password are corrects` {
             @Test
-            fun `WHEN login returns success THEN post success on login view state`() = runBlockingTest {
+            fun `WHEN login returns success THEN post success on login view state`() {
                 coEvery { validateUserEmailUseCase.execute(any()) } returns Result.success(Unit)
                 coEvery { validateAppPasswordUseCase.execute(any()) } returns Result.success(Unit)
                 coEvery { doLoginUseCase.execute(any()) } returns Result.success(Unit)
@@ -121,18 +131,17 @@ class LoginViewModelTest {
             }
 
             @Test
-            fun `WHEN login returns failure THEN post failure on login view state`() =
-                runBlockingTest {
-                    val exception = Exception()
-                    coEvery { validateUserEmailUseCase.execute(any()) } returns Result.success(Unit)
-                    coEvery { validateAppPasswordUseCase.execute(any()) } returns Result.success(Unit)
-                    coEvery { doLoginUseCase.execute(any()) } returns Result.failure(exception)
-                    subject.doLogin(randomString, randomString, randomBoolean)
-                    coVerifySequence {
-                        viewStateObserverMock.onChanged(ViewState.loading())
-                        viewStateObserverMock.onChanged(ViewState.failure(exception))
-                    }
+            fun `WHEN login returns failure THEN post failure on login view state`() {
+                val exception = Exception()
+                coEvery { validateUserEmailUseCase.execute(any()) } returns Result.success(Unit)
+                coEvery { validateAppPasswordUseCase.execute(any()) } returns Result.success(Unit)
+                coEvery { doLoginUseCase.execute(any()) } returns Result.failure(exception)
+                subject.doLogin(randomString, randomString, randomBoolean)
+                coVerifySequence {
+                    viewStateObserverMock.onChanged(ViewState.loading())
+                    viewStateObserverMock.onChanged(ViewState.failure(exception))
                 }
+            }
 
             @Test
             fun `WHEN need to save credentials AND login returns success THEN call repository to save credentials`() =

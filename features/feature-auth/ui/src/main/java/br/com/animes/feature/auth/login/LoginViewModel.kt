@@ -16,13 +16,16 @@ import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPasswordUseCase
 import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmailUseCase
 import br.com.animes.feature.auth.model.LoginErrorMessageEnum
+import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val validateUserEmailUseCase: UseCase<ValidateUserEmailUseCase.Params, Unit>,
     private val validateAppPasswordUseCase: UseCase<ValidateAppPasswordUseCase.Params, Unit>,
     private val doLoginUseCase: UseCase<UserCredentials, Unit>,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val dispatcher: CoroutineContext = Dispatchers.Main
 ) : ViewModel() {
     private val _loginViewState = SingleLiveDataEvent<ViewState<Unit>>()
     private val _userEmailError = MutableLiveData<LoginErrorMessageEnum>()
@@ -37,7 +40,7 @@ class LoginViewModel(
     val userEmail: LiveData<String> = _userEmail
 
     fun doLogin() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             _loginViewState.postLoading()
             authRepository.doLogin().onSuccess {
                 _loginViewState.postSuccess(it)
@@ -48,13 +51,13 @@ class LoginViewModel(
     }
 
     fun getUser() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             _userEmail.postValue(authRepository.getUserEmail().getOrNull() ?: "")
         }
     }
 
     fun doLogin(user: String, password: String, saveCredentials: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             val validateUserResult = validateUser(user)
             val validatePasswordResult = validatePassword(password)
 
@@ -66,7 +69,7 @@ class LoginViewModel(
     }
 
     fun checkCredentials() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             authRepository.hasCredentials().onSuccess {
                 _hasCredentials.postValue(it)
             }
