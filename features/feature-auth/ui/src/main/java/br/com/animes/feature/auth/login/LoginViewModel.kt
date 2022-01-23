@@ -15,6 +15,7 @@ import br.com.animes.feature.auth.domain.model.UserCredentials
 import br.com.animes.feature.auth.domain.repository.AuthRepository
 import br.com.animes.feature.auth.domain.use.cases.ValidateAppPasswordUseCase
 import br.com.animes.feature.auth.domain.use.cases.ValidateUserEmailUseCase
+import br.com.animes.feature.auth.model.LoginErrorMessageEnum
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -24,14 +25,14 @@ class LoginViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _loginViewState = SingleLiveDataEvent<ViewState<Unit>>()
-    private val _userEmailError = MutableLiveData<Throwable>()
-    private val _passwordError = MutableLiveData<Throwable>()
+    private val _userEmailError = MutableLiveData<LoginErrorMessageEnum>()
+    private val _passwordError = MutableLiveData<LoginErrorMessageEnum>()
     private val _hasCredentials = MutableLiveData<Boolean>()
     private val _userEmail = SingleLiveDataEvent<String>()
 
     val loginViewState: LiveData<ViewState<Unit>> = _loginViewState
-    val userEmailError: LiveData<Throwable> = _userEmailError
-    val passwordError: LiveData<Throwable> = _passwordError
+    val userEmailError: LiveData<LoginErrorMessageEnum> = _userEmailError
+    val passwordError: LiveData<LoginErrorMessageEnum> = _passwordError
     val hasCredentials: LiveData<Boolean> = _hasCredentials
     val userEmail: LiveData<String> = _userEmail
 
@@ -91,7 +92,9 @@ class LoginViewModel(
                 password
             )
         ).onFailure {
-            _passwordError.postValue(it)
+            _passwordError.postValue(
+                LoginErrorMessageEnum.valueOfOrDefault(it)
+            )
         }
     }
 
@@ -99,7 +102,9 @@ class LoginViewModel(
         return validateUserEmailUseCase.execute(
             ValidateUserEmailUseCase.Params(user)
         ).onFailure {
-            _userEmailError.postValue(it)
+            _userEmailError.postValue(
+                LoginErrorMessageEnum.valueOfOrDefault(it)
+            )
         }
     }
 }

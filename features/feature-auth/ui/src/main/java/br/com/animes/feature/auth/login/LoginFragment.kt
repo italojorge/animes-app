@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import br.com.animes.core.dialog.AlertDialogExtension.showAlert
 import br.com.animes.core.dialog.AlertDialogExtension.showErrorAlert
 import br.com.animes.core.extensions.cleanErrorTextAfterTextChanged
 import br.com.animes.core.extensions.doOnSubmit
@@ -17,6 +18,8 @@ import br.com.animes.feature.auth.biometric.AuthenticationResult
 import br.com.animes.feature.auth.biometric.BiometricAuthenticator
 import br.com.animes.feature.auth.biometric.BiometricChecker
 import br.com.animes.feature.auth.databinding.FragmentLoginBinding
+import br.com.animes.feature.auth.model.LoginErrorMessageEnum
+import br.com.animes.feature.auth.model.LoginErrorMessageEnum.INVALID_CREDENTIALS
 import br.com.animes.feature.auth.navigation.AuthNavigation
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -74,17 +77,25 @@ class LoginFragment : Fragment() {
                 onSuccess = {
                     authNavigation.navigateToHome()
                 },
-                onFailure = { showErrorAlert(it) },
+                onFailure = {
+                    if (LoginErrorMessageEnum.valueOfOrDefault(it) == INVALID_CREDENTIALS)
+                        INVALID_CREDENTIALS.value?.let { requireContext().showAlert(getString(INVALID_CREDENTIALS.value)) }
+                    else showErrorAlert(it)
+                },
                 isLoading = {
                     binding.loginLoadingButton.isLoading = it
                 }
             )
         }
-        viewModel.passwordError.observe(owner) {
-            binding.loginPasswordTextInputLayout.error = it.message
+        viewModel.passwordError.observe(owner) { errorMessageEnum ->
+            errorMessageEnum.value?.let { resId ->
+                binding.loginPasswordTextInputLayout.error = getString(resId)
+            }
         }
-        viewModel.userEmailError.observe(owner) {
-            binding.loginEmailTextInputLayout.error = it.message
+        viewModel.userEmailError.observe(owner) { errorMessageEnum ->
+            errorMessageEnum.value?.let { resId ->
+                binding.loginEmailTextInputLayout.error = getString(resId)
+            }
         }
         viewModel.hasCredentials.observe(owner) { hasCredentials ->
             binding.loginBiometricSwitch.isVisible =

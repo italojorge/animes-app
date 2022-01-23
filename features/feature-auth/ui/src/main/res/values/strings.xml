@@ -5,6 +5,10 @@
     <string name="login_description">Here you can consult the animes of your choice and view their details!</string>
     <string name="login_email_hint" translatable="false">E-mail</string>
     <string name="login_activate_biometric_message">Fingerprint</string>
+    <string name="login_invalid_password_error_message">Invalid password.</string>
+    <string name="login_invalid_email_error_message">Invalid E-mail.</string>
+    <string name="login_invalid_credentials_error_message">Invalid data. Double check the information provided.</string>
+    <string name="login_empty_field_error_message">Required field.</string>
     <string name="biometric_dialog_negative_text">Cancel</string>
     <string name="biometric_dialog_title">Confirm your fingerprint</string>
     <string name="activate_biometric_negative_message">No</string>

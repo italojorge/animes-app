@@ -13,8 +13,8 @@ object AlertDialogExtension : KoinComponent {
 //    private val analyticsEvent: AnalyticsEvent by inject()
 
     fun Context.showAlert(
-        title: CharSequence,
         message: CharSequence,
+        title: CharSequence = "Ops!",
         @StringRes positiveButtonMessage: Int = R.string.dialog_ok_button_message,
         positiveButtonClickListener: (() -> Unit)? = null
     ) {

@@ -6,6 +6,6 @@ open class DomainException(message: String, title: String? = null) :
 sealed class ParamException(message: String, title: String? = null) :
     DomainException(message, title)
 
-class MissingParamsException : ParamException("Params must not be null.")
+class MissingParamsException : ParamException("Os parâmetros não podem ser nulos")
 class EmptyFieldException : ParamException("Campo obrigatório.")
 class FieldValueException(message: String) : ParamException(message)

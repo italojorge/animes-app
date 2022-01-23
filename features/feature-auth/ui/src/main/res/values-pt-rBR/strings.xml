@@ -4,6 +4,10 @@
     <string name="login_sub_title">Bem-vindo ao Animes App</string>
     <string name="login_description">Aqui você pode consultar os animes de sua preferência e visualizar seus detalhes!</string>
     <string name="login_activate_biometric_message">Leitor de Digital</string>
+    <string name="login_invalid_password_error_message">Senha inválida.</string>
+    <string name="login_invalid_email_error_message">E-mail inválido.</string>
+    <string name="login_invalid_credentials_error_message">Dados inválidos. Confira novamente as informações inseridas.</string>
+    <string name="login_empty_field_error_message">Campo obrigatório.</string>
     <string name="biometric_dialog_negative_text">Cancelar</string>
     <string name="biometric_dialog_title">Confirme sua Digital</string>
     <string name="activate_biometric_negative_message">Não</string>
