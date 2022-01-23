@@ -2,9 +2,12 @@ package br.com.animes.feature.auth.login
 
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
+import br.com.animes.domain.exception.EmptyFieldException
 import br.com.animes.domain.utils.Result
 import br.com.animes.domain.utils.randomString
 import br.com.animes.feature.auth.biometric.AuthenticationResult
+import br.com.animes.feature.auth.domain.use.cases.InvalidEmailException
+import br.com.animes.feature.auth.domain.use.cases.InvalidPasswordException
 import br.com.animes.feature.auth.login.di.LoginTestDependencies
 import br.com.animes.feature.auth.login.robot.onLaunch
 import br.com.animes.test.utils.InstantExecutorExtension
@@ -126,6 +129,66 @@ class LoginFragmentTest {
             onLaunch().checkIf {
                 verify(exactly = 1) { LoginTestDependencies.biometricAuth.authenticate(any()) }
                 coVerify(exactly = 1) { LoginTestDependencies.authRepository.doLogin() }
+            }
+        }
+    }
+
+    @Nested
+    inner class Given_invalid_credentials {
+        @Test
+        fun when_user_email_is_wrong_then_show_error_message_in_user_email_field() {
+            val invalidEmailException = InvalidEmailException()
+
+            coEvery { LoginTestDependencies.biometricChecker.hasBiometrics() } returns true
+            coEvery { LoginTestDependencies.authRepository.hasCredentials() } returns Result.success(false)
+            coEvery { LoginTestDependencies.validateAppPasswordUseCase.execute(any()) } returns Result.success(Unit)
+            coEvery { LoginTestDependencies.validateUserEmailUseCase.execute(any()) } returns Result.failure(invalidEmailException)
+            justRun { LoginTestDependencies.authNavigation.navigateToHome() }
+
+            onLaunch {
+                typeAnEmail("test")
+                typeAPassword("213521")
+                clickOnEnterButton()
+            }.checkIf {
+                hasErrorTextOnUserEmailTextInputLayout("Invalid E-mail.")
+            }
+        }
+
+        @Test
+        fun when_password_is_wrong_then_show_error_message_in_password_field() {
+            val invalidPasswordException = InvalidPasswordException()
+
+            coEvery { LoginTestDependencies.biometricChecker.hasBiometrics() } returns true
+            coEvery { LoginTestDependencies.authRepository.hasCredentials() } returns Result.success(false)
+            coEvery { LoginTestDependencies.validateAppPasswordUseCase.execute(any()) } returns Result.failure(invalidPasswordException)
+            coEvery { LoginTestDependencies.validateUserEmailUseCase.execute(any()) } returns Result.success(Unit)
+
+            onLaunch {
+                typeAnEmail("test@gmail.com")
+                typeAPassword("123")
+                clickOnEnterButton()
+            }.checkIf {
+                hasErrorTextOnPasswordTextInputLayout("Invalid password.")
+            }
+        }
+
+        @Test
+        fun when_user_email_and_password_are_wrong_then_show_error_message_in_both_fields() {
+            val emptyFieldException = EmptyFieldException()
+            val invalidPasswordException = InvalidPasswordException()
+
+            coEvery { LoginTestDependencies.biometricChecker.hasBiometrics() } returns true
+            coEvery { LoginTestDependencies.authRepository.hasCredentials() } returns Result.success(false)
+            coEvery { LoginTestDependencies.validateAppPasswordUseCase.execute(any()) } returns Result.failure(invalidPasswordException)
+            coEvery { LoginTestDependencies.validateUserEmailUseCase.execute(any()) } returns Result.failure(emptyFieldException)
+
+            onLaunch {
+                typeAnEmail("")
+                typeAPassword("123")
+                clickOnEnterButton()
+            }.checkIf {
+                hasErrorTextOnUserEmailTextInputLayout("Required field.")
+                hasErrorTextOnPasswordTextInputLayout("Invalid password.")
             }
         }
     }

@@ -16,7 +16,9 @@ import br.com.animes.core.custom.views.LoadingButton
 import br.com.animes.feature.auth.R
 import br.com.animes.feature.auth.login.LoginFragment
 import br.com.animes.feature.auth.login.LoginFragmentTest
+import com.google.android.material.textfield.TextInputLayout
 import org.hamcrest.Description
+import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsNot
@@ -46,10 +48,6 @@ class LoginFragmentRobot {
 }
 
 class LoginFragmentResult {
-//    fun recoveryCardPasswordTokenFragmentIsOpen(navController: TestNavHostController) {
-//        assertEquals(R.id.recovery_card_password_token_fragment, navController.currentDestination?.id)
-//    }
-
     fun isShowingCorrectTexts() {
         checkTextOnView(R.id.login_title_text_view, "Animes App")
         checkTextOnView(R.id.login_sub_title_text_view, "Welcome to Animes App")
@@ -76,6 +74,27 @@ class LoginFragmentResult {
         onView(ViewMatchers.withText(text))
             .inRoot(RootMatchers.isDialog())
             .check(ViewAssertions.matches(isDisplayed()))
+    }
+
+    fun hasErrorTextOnUserEmailTextInputLayout(errorText: String) {
+        checkTextInputLayoutError(R.id.login_email_text_input_layout, errorText)
+    }
+
+    fun hasErrorTextOnPasswordTextInputLayout(errorText: String) {
+        checkTextInputLayoutError(R.id.login_password_text_input_layout, errorText)
+    }
+
+    private fun checkTextInputLayoutError(@IdRes viewId: Int, errorText: String) {
+        onView(withId(viewId)).check(ViewAssertions.matches(hasTextInputLayoutErrorText(errorText)))
+    }
+
+    private fun hasTextInputLayoutErrorText(expectedErrorText: String): Matcher<View> {
+        return object : TypeSafeMatcher<View>() {
+
+            override fun matchesSafely(item: View) = item is TextInputLayout && item.error == expectedErrorText
+
+            override fun describeTo(description: Description) {}
+        }
     }
 
     private fun checkTextOnLoadingButton() {
