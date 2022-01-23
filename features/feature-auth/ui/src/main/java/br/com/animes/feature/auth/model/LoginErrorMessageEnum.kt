@@ -6,6 +6,7 @@ import br.com.animes.feature.auth.R
 import br.com.animes.feature.auth.domain.use.cases.InvalidEmailException
 import br.com.animes.feature.auth.domain.use.cases.InvalidPasswordException
 import br.com.animes.feature.auth.domain.use.cases.LoginInvalidCredentialsException
+import br.com.animes.feature.auth.domain.use.cases.RepeatingPasswordException
 
 enum class LoginErrorMessageEnum(@StringRes val value: Int?) {
     EMPTY_FIELD(R.string.login_empty_field_error_message), INVALID_PASSWORD(R.string.login_invalid_password_error_message),
@@ -16,7 +17,7 @@ enum class LoginErrorMessageEnum(@StringRes val value: Int?) {
         fun valueOfOrDefault(throwable: Throwable): LoginErrorMessageEnum = when (throwable) {
             is EmptyFieldException -> EMPTY_FIELD
             is LoginInvalidCredentialsException -> INVALID_CREDENTIALS
-            is InvalidPasswordException -> INVALID_PASSWORD
+            is RepeatingPasswordException, is InvalidPasswordException -> INVALID_PASSWORD
             is InvalidEmailException -> INVALID_EMAIL
             else -> UNKNOWN_ERROR
         }
