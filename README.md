@@ -26,7 +26,8 @@ Características gerais da arquitetura do app:
 * Utiliza a abordagem de single activity com gerenciamento de fragments através do navigation;
 * App totalmente escrito em Kotlin, incluindo o Gradle. Para isso, utiliza Kotlin DSL para organização dos arquivos Gradle do app;
 * Apresenta modularização, onde cada módulo tem sua responsabilidade única dentro do aplicativo.
-* Possui testes instrumentados (utilizando Espresso) e testes unitários (utilizando JUnit5).
+* Possui testes instrumentados (utilizando Espresso) e testes unitários (utilizando JUnit5) que seguem o BDD para suas escritas.
+* Possui internacionalização de strings em pt-Br e inglês.
 
 Obs: No momento, a única feature coberta por testes é a Feature Auth.
 
