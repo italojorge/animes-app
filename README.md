@@ -1,7 +1,7 @@
 Contexto do app:
 
 Aplicativo de listagem de animes, onde é possível filtrar a lista através das categorias ou pesquisar um anime através de seu nome. Também é possível visualizar os
-detalhes do anime clicado. O App é composto por 3 telas:
+detalhes do anime clicado. O App é composto por 4 telas:
 
 Tela Splash: Splash com animação Lottie
 
