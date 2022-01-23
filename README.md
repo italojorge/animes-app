@@ -19,13 +19,16 @@ Tela de detalhes de um anime: Nessa tela são exibidas em detalhes as informaç�
 
 Arquitetura do aplicativo:
 
-O app utiliza Clean Architecture + MVVM para desenvolvimento das features, onde cada feature é dividida em 4 camadas: UI, Domain, Data e Data Remote. 
+O app utiliza Clean Architecture + MVVM para desenvolvimento das features, onde cada feature é dividida em 4 camadas: UI, Domain, Data e Data Remote.
 
 Características gerais da arquitetura do app:
 
-* Utiliza a abordagem de single activity com gerenciamento de fragments através do navigation; 
+* Utiliza a abordagem de single activity com gerenciamento de fragments através do navigation;
 * App totalmente escrito em Kotlin, incluindo o Gradle. Para isso, utiliza Kotlin DSL para organização dos arquivos Gradle do app;
 * Apresenta modularização, onde cada módulo tem sua responsabilidade única dentro do aplicativo.
+* Possui testes instrumentados (utilizando Espresso) e testes unitários (utilizando JUnit5).
+
+Obs: No momento, a única feature coberta por testes é a Feature Auth.
 
 Abaixo serão listados os módulos existentes e suas respectivas funções:
 
