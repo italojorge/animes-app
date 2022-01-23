@@ -5,10 +5,10 @@ detalhes do anime clicado. O App é composto por 3 telas:
 
 Tela Splash: Splash com animação Lottie
 
-Tela Login: Esta tela possui tratamentos de erro caso o usuário digite email ou senha inválidos (senha vazia ou senha com dígitos repetidos). É
-possível digitar qualquer e-mail e senha para realizar autenticação no app para fazer login com sucesso. A tela também permite realizar o login
-através de biometria. Para isso, caso o device possua o hardware de biometria, será exibido um toggle na tela, permitindo salvar as credenciais de
-acesso caso o login seja realizado com sucesso e podendo realizar login por biometria do segundo acesso em diante.
+Tela Login: Esta tela possui tratamentos de erro caso o usuário digite email ou senha inválidos (senha vazia ou com dígitos repetidos). É possível
+digitar qualquer e-mail e senha para realizar autenticação no app para fazer login com sucesso. A tela também permite realizar o login através de
+biometria. Para isso, caso o device possua o hardware de biometria, será exibido um toggle na tela, permitindo salvar as credenciais de acesso caso o
+login seja realizado com sucesso e podendo realizar login por biometria do segundo acesso em diante.
 
 Home: Tela que apresenta a lista de animes com opções de filtro por categoria (tv, ova, filme...) ou pela busca de um anime através de seu título. A
 tela utiliza paginação para carregar a lista de animes e esta foi implementada através da lib "Paging 3" (parte do jetpack do android).
