@@ -52,7 +52,10 @@ Módulos Compartilhados:
 
 *Módulo buildSrc: Responsável por conter arquivos utilitários para gerenciamento do gradle. Possui extensions de Kotlin DSL e constantes para facilitar o gerenciamento das dependencias de libs que as módulos precisam.
 
-Módulos de features: Como explicado anteriormente, cada feature possui 4 módulos: UI, Domain, Data e Data Remote.
+##
+
+Módulos de features:
+Como explicado anteriormente, cada feature possui 4 módulos: UI, Domain, Data e Data Remote.
 
 *Feature Auth: Contém todos os módulos de feature descritos anteriormente, é a feature responsável pela implementação da biometria e tela de login do app.
 
