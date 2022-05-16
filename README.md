@@ -1,4 +1,4 @@
-<img height="480px" src="gif/gif_app.gif">
+<img height="620x" src="gif/gif_app.gif">
 
 ## Contexto do app:
 
