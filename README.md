@@ -44,19 +44,11 @@ Módulos Compartilhados:
            
 *Test Utils: Módulo utilitário que contém classes utilizadas para criação dos testes unitários e de UI do app.
 
-##
-
 - Módulo Data Local: Módulo compartilhado entre as features, responsável por salvar, obter e editar as informaçoes salvas localmente no app. Através de sharedPreferences para gerenciamneto de dados simples e Room para dados complexos. Optei por deixar este módulo compartilhado entre as features devido a alguns problemas comentados no Google I/O das abordagens de utilização do Room Híbrida e por feature, onde se torna complexo o gereciamento quando uma tabela deve ser utilizada por 2 features ao mesmo tempo.
-
-##
 
 - Módulo DI: Responsável por gerenciar as injeções de dependencia do aplicativo. Este módulo é independente de todos e precisa conhecer todos os outros para conseguir realizar a DI sem gerar dependência cíclica.
 
-##
-
 - Módulo Navigation: Responsável por gerenciar a navegação entre as features do app. Supondo que o usuário deseje navegar da feature A para feature B, porém essas features estão em módulos separados que não se conhecem, a navegação neste caso será feita através de navigation por deeplink. Cada feature contém uma interface de navegação (ex: AuthNavigation) que contém métodos para navegar para outra feature. O módulo navigation realiza a implementação destas interfaces, onde através de deeplink do navigation, ele consegue gerenciar a navegação entre as features. Ele contém um xml de navigation chamado "global-navigation" que contém todos os gráficos de navegação de cada feature, permitindo assim conhecê-las para realizar a navegação por deeplink.
-
-##
 
 - Módulo buildSrc: Responsável por conter arquivos utilitários para gerenciamento do gradle. Possui extensions de Kotlin DSL e constantes para facilitar o gerenciamento das dependencias de libs que as módulos precisam.
 
